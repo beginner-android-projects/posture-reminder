@@ -1,0 +1,147 @@
+<resources>
+    <!-- App -->
+    <string name="app_name">Posture Reminder</string>
+
+    <!-- Navigation -->
+    <string name="home_label">Inicio</string>
+    <string name="health_label">Salud</string>
+    <string name="account_label">Cuenta</string>
+    <string name="create_reminder_label">Nuevo recordatorio</string>
+
+    <!-- Actions -->
+    <string name="action_done">Listo</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_undo">Deshacer</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_send">Send</string>
+    <string name="action_finish">Finalizar</string>
+    <string name="action_disable">Desactivar</string>
+
+    <!-- Welcome -->
+    <string name="welcome_pager_title1">Vivi al maximo!</string>
+    <string name="welcome_pager_title2">Adios a los dolores de espalda!</string>
+    <string name="welcome_pager_title3">Aprovechar de leer un buen libro!</string>
+
+    <!-- Home -->
+    <string name="alarm_on">The app is on</string>
+    <string name="alarm_off">The app is off</string>
+    <string name="stop_alarm">Stop</string>
+    <string name="start_alarm">Start</string>
+    <string name="background_image_content_descr">Background image</string>
+
+    <!--Settings Screen-->
+    <string name="notifications">Notifications</string>
+    <string name="notifications_summary_off">Notifications are off</string>
+    <string name="notifications_summary_on">Notifications are on</string>
+    <string name="time_interval_alarm">Time interval for notifications</string>
+    <string name="start_alarm_time">Start notifications at this time</string>
+    <string name="end_alarm_time">Stop notifications at this time</string>
+    <string name="settings_label">Settings</string>
+    <string name="posture_notification_title">Posture Notification</string>
+    <string name="posture_notification_text">Time to fix your posture!</string>
+    <string name="app_version" translatable="false">Version 1.2.0</string>
+    <string name="about">About</string>
+    <string name="bug_report_title_pref">Feedback and problems</string>
+    <string name="bug_report_summary_pref">Send us feedback or report a problem</string>
+    <string name="bug_report_sended_toast">The report has been sent successfully. Thanks for helping!</string>
+    <string name="notifications_set_toast">Notifications set from %1$s to %2$s.</string>
+    <string name="remember_to_reset_toast">Remember to reset the app in the main screen so the new changes apply.</string>
+    <string name="panda_unlocked_message">Panda unlocked! Go back to the main screen to enjoy his cuteness!</string>
+    <string name="report_message_tittle">What do you want to tell us?</string>
+    <string name="end_time_title">Ending time</string>
+    <string name="start_time_title">Starting time</string>
+    <string name="bug_report_dialog_hint">Message..</string>
+    <string name="alarm_days_title">Days enabled</string>
+    <string name="time_interval_title">Time interval</string>
+    <string name="alarms_off_toast">The alarm has been deactivated.</string>
+    <string name="new_config_saved_toast">The alarm has been updated with the new configuration.</string>
+    <string name="report_sended_toast">Sent successfully. Thanks for helping us improve our app.</string>
+    <string name="report_error_toast">An error occurred. Check your connection and try again.</string>
+    <string name="alarm_days_pref_tittle">Days enabled for notifications</string>
+    <string name="bug_report_email_title">How can we reach you?</string>
+    <string name="email">E-mail</string>
+    <string name="time_interval_pref_title">Set the time interval</string>
+    <string name="time_hint">Time</string>
+    <string name="time_interval_cant_be_zero">The time interval can\'t be 0.</string>
+    <string name="error_occurred">An error occurred. Please try again.</string>
+    <string name="bug_report_name_title">What is your human name?</string>
+    <string name="name_hint">Name</string>
+    <string name="minutes">Minutes</string>
+    <string name="hours">Hours</string>
+    <string name="time_unit_title">What time unit would you like to use?</string>
+
+    <!--Announcement Screen-->
+    <string name="coming_soon">Proximamente</string>
+    <string name="announcement_title">Actualizacion - Version 1.2.0</string>
+    <string name="announcement_content">Antes que nada, me gustaría agradecerles a todas las personas que me enviaron un reporte o sugerencia, mejoremos la app juntos!</string>
+    <string name="announcement_5">*Se agregara una opcion para habilitar la muestra de un ejercicio para mejorar la postura y relajar los musculos al hacerle click a la notificacion.</string>
+    <string name="announcement_4">*Habilidad de tener varios perfiles configurados para hacer cambios en la configuracion rapidamente.</string>
+    <string name="announcement_3">*Ahora los intervalos de tiempo son completamente personalizables.</string>
+    <string name="announcement_2">*Se cambio el fondo para que no se sienta muy aburrido el inicio.</string>
+    <string name="announcement_1">*Nuevos campos de email y nombre en el envio de los reportes/ sugerencias así los puedo contactar y preguntar mas en detalle sobre sus ideas o problemas.</string>
+    <string name="announcement_6">*Cambio de color a la perilla de notificaciones para hacerlo mas claro cuando esta prendida/ apagada.</string>
+    <string name="announcement_7">*Se redujo el tamaño de la app significativamente ( 40% ~).</string>
+    <string name="new_announcement_title">Nueva actualizacion instalada!</string>
+    <string name="announcement_message">Gracias a todos por su ayuda a mejorar la app.\nClick para ver los últimos cambios hechos.</string>
+
+
+    <string-array name="alarmDays">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string-array name="vibrationPatterns">
+        <item>Disabled</item>
+        <item>Normal</item>
+        <item>Stairs</item>
+        <item>Fast</item>
+    </string-array>
+
+    <string-array name="theme_names">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Defined by system</item>
+    </string-array>
+
+    <integer-array name="theme_values">
+        <item>1</item>
+        <item>2</item>
+        <item>-1</item>
+    </integer-array>
+
+    <string name="snack_delete_reminder_success">Recordatorio eliminado</string>
+    <string name="snack_configuration_updated">Ajustes actualizados</string>
+    <string name="name">Nombre</string>
+    <string name="reminder_name">Nombre del recordatorio</string>
+    <string name="interval">Intervalo</string>
+    <string name="days">Dias</string>
+    <string name="start_time">Inciar</string>
+    <string name="end_time">Finalizar</string>
+    <string name="sound">Sonido</string>
+    <string name="vibration">Vibracion</string>
+    <string name="disabled">Desactivado</string>
+    <string name="enabled">Activado</string>
+    <string name="color_picker_title">Color del recordatorio</string>
+    <string name="vibration_picker_title">Vibracion</string>
+    <string name="sound_tone_item_none">Ninguno</string>
+    <string name="sound_picker_title">Sonido</string>
+    <string name="snack_reminder_created_success">Recordatorio creado satisfactoriamente</string>
+    <string name="experience">Experiencia</string>
+    <string name="exercises">Ejercicios</string>
+
+    <!--    <string name="updated_version">Updated to v%1$s</string>-->
+    <string name="updated_version">Actualizado a v%1$s</string>
+
+    <string name="whats_new">Qué hay de nuevo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    <string name="whats_new">What\'s new</string>-->
+
+</resources>
