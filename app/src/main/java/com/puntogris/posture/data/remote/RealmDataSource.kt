@@ -3,9 +3,7 @@ package com.puntogris.posture.data.remote
 import android.content.Context
 import com.puntogris.posture.data.OnSaveListener
 import com.puntogris.posture.di.realmApp
-import com.puntogris.posture.model.Reminder
-import com.puntogris.posture.model.Sound
-import com.puntogris.posture.model.User
+import com.puntogris.posture.model.*
 import com.puntogris.posture.utils.userId
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.realm.Realm
@@ -18,6 +16,8 @@ import io.realm.mongodb.Credentials
 import io.realm.mongodb.sync.SyncConfiguration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOn
 import org.bson.Document
 import javax.inject.Inject
@@ -30,23 +30,22 @@ class RealmDataSource @Inject constructor(
     //realmApp is initialized in the Application
     private lateinit var realm: Realm
 
-    fun login(
+    fun loginWithEmailCredentials(
         userName: String,
-        password: String,
-        loginSuccess: (io.realm.mongodb.User) -> Unit,
-        loginError: (AppException?) -> Unit
-    ) {
-
+        password: String
+    ): StateFlow<LoginResult> {
+        val result = MutableStateFlow<LoginResult>(LoginResult.InProgress)
         val appCredentials = Credentials.emailPassword(userName, password)
         realmApp.loginAsync(appCredentials) {
             if (it.error != null) {
-                loginError.invoke(it.error)
+                result.value = LoginResult.Error(it.error.localizedMessage)
             } else {
                 val user = it.get()
                 instantiateRealm(user)
-                loginSuccess.invoke(user)
+                result.value = LoginResult.Success
             }
         }
+        return result
     }
 
     fun logOut(
@@ -69,6 +68,7 @@ class RealmDataSource @Inject constructor(
         val configuration = SyncConfiguration
             .Builder(user, realmApp.userId())
             .build()
+
         realm = Realm.getInstance(configuration)
     }
 
@@ -86,19 +86,17 @@ class RealmDataSource @Inject constructor(
             .toFlow()
     }
 
-    fun saveReminderWithTransaction(
-        reminder: Reminder,
-        listener: OnSaveListener
-    ) {
-        realm.executeTransactionAsync(
-            {
-                reminder.userId = realmApp.userId()
-                it.insertOrUpdate(reminder)
-
-            },
-            { listener.onSuccess() },
-            { listener.onError(it) }
-        )
+    fun insertReminderWithTransaction(reminder: Reminder): StateFlow<RepoResult> {
+        return MutableStateFlow<RepoResult>(RepoResult.InProgress).also { result ->
+            realm.executeTransactionAsync(
+                {
+                    reminder.userId = realmApp.userId()
+                    it.insertOrUpdate(reminder)
+                },
+                { result.value = RepoResult.Success },
+                { result.value = RepoResult.Error }
+            )
+        }
     }
 
 
@@ -106,5 +104,17 @@ class RealmDataSource @Inject constructor(
         realm.executeTransactionAsync {
             it.where<Reminder>().equalTo("_id", reminder._id).findFirst()?.deleteFromRealm()
         }
+    }
+
+
+    fun instantiateRealmWithCurrentUser(){
+        realmApp.currentUser()?.let {
+            instantiateRealm(it)
+        }
+    }
+
+
+    fun closeRealm(){
+        realm.close()
     }
 }

@@ -20,7 +20,7 @@ class ManageRemindersViewModel @Inject constructor(
         repository.deleteReminder(reminder)
     }
 
-    fun insertReminder(reminder: Reminder, saveListener: OnSaveListener) {
+    fun insertReminder(reminder: Reminder) {
         val copy = Reminder(
             _id = reminder._id,
             name = reminder.name,
@@ -33,7 +33,7 @@ class ManageRemindersViewModel @Inject constructor(
             vibrationPattern = reminder.vibrationPattern,
             sound = reminder.sound
         )
-        repository.insertReminder(copy, saveListener)
+        repository.insertReminder(copy)
 
     }
 

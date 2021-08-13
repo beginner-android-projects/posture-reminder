@@ -6,6 +6,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.puntogris.posture.BuildConfig
 import com.puntogris.posture.data.remote.RealmDataSource
@@ -33,6 +35,7 @@ class App: Application(){
         realmApp = App(AppConfiguration.Builder(BuildConfig.REALM_APP_ID).defaultClientResetHandler { _, error ->
             Log.d("RealmApp Handler", error?.localizedMessage.toString())
         }.build())
+
 
     }
 

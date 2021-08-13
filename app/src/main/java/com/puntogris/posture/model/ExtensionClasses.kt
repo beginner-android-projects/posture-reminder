@@ -1,8 +1,9 @@
 package com.puntogris.posture.model
 
 sealed class RepoResult{
+    object InProgress: RepoResult()
     object Success: RepoResult()
-    object Failure: RepoResult()
+    object Error: RepoResult()
 }
 
 sealed class ReminderUi{
@@ -21,4 +22,9 @@ sealed class ReminderUi{
 sealed class AuthState {
     object AuthRequired : AuthState()
     object AuthComplete : AuthState()
+}
+sealed class LoginResult {
+    object InProgress: LoginResult()
+    object Success: LoginResult()
+    class Error(val errorMsg: String?): LoginResult()
 }

@@ -20,6 +20,7 @@ import com.puntogris.posture.data.OnSaveListener
 import com.puntogris.posture.databinding.BottomSheetNewReminderBinding
 import com.puntogris.posture.model.Reminder
 import com.puntogris.posture.model.ReminderUi
+import com.puntogris.posture.model.RepoResult
 import com.puntogris.posture.model.Sound
 import com.puntogris.posture.ui.base.BaseBottomSheetFragment
 import com.puntogris.posture.utils.Constants.DATA_KEY
@@ -30,6 +31,7 @@ import com.puntogris.posture.utils.Constants.VIBRATION_PICKER_KEY
 import com.puntogris.posture.utils.Utils
 import com.puntogris.posture.utils.createSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -72,16 +74,18 @@ class NewReminderBottomSheet : BaseBottomSheetFragment<BottomSheetNewReminderBin
     }
 
     fun onSaveReminder() {
-        viewModel.saveReminderRoom(object : OnSaveListener{
-            override fun onSuccess() {
-                createSnackBar(getString(R.string.snack_reminder_created_success))
-                findNavController().navigateUp()
+        lifecycleScope.launch {
+            viewModel.saveReminder().collect {
+                when(it){
+                    RepoResult.Error -> {}
+                    RepoResult.InProgress -> {}
+                    RepoResult.Success -> {
+                        createSnackBar(getString(R.string.snack_reminder_created_success))
+                        findNavController().navigateUp()
+                    }
+                }
             }
-
-            override fun onError(it: Throwable) {
-
-            }
-        })
+        }
     }
 
     private fun onReminderItemClicked(reminderUi: ReminderUi) {

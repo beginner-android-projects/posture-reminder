@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -15,14 +15,16 @@ import com.google.android.gms.tasks.Task
 import com.puntogris.posture.R
 import com.puntogris.posture.databinding.FragmentLoginBinding
 import com.puntogris.posture.di.realmApp
-import com.puntogris.posture.model.User
+import com.puntogris.posture.model.LoginResult
 import com.puntogris.posture.ui.base.BaseFragment
+import com.puntogris.posture.utils.createSnackBar
+import com.puntogris.posture.utils.gone
+import com.puntogris.posture.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-import io.realm.Realm
 import io.realm.mongodb.Credentials
 import io.realm.mongodb.auth.GoogleAuthType
-import io.realm.mongodb.sync.SyncConfiguration
-import java.lang.Exception
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment :BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
@@ -39,18 +41,23 @@ class LoginFragment :BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
                 handleSignInResult(task)
             }
         }
-
-        viewModel.login("tes2@gmail.com", "testtest")
-        viewModel.loginLiveData.observe(viewLifecycleOwner, Observer(::handleLoginResult))
+        loginWithEmail()
     }
 
-    private fun handleLoginResult(loginResult: LoginViewModel.LoginResult) {
-        when (loginResult) {
-            is LoginViewModel.LoginResult.LoginSuccess -> {
-                findNavController().navigate(R.id.welcomeFragment)
-            }
-            is LoginViewModel.LoginResult.LoginError -> {
-               //show error
+    private fun loginWithEmail() {
+        lifecycleScope.launch {
+            viewModel.startLoginWithEmail("tes2@gmail.com", "testtest").collect {
+                when(it){
+                    is LoginResult.Error -> {
+                        binding.progressBar.gone()
+                        createSnackBar("Error")
+                    }
+                    LoginResult.InProgress -> binding.progressBar.visible()
+                    LoginResult.Success -> {
+                        binding.progressBar.gone()
+                        findNavController().navigate(R.id.welcomeFragment)
+                    }
+                }
             }
         }
     }

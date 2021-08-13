@@ -19,9 +19,8 @@ class NewReminderViewModel @Inject constructor(
     private val _reminderConfig = MutableLiveData(Reminder())
     val reminder: LiveData<Reminder> = _reminderConfig
 
-    fun saveReminderRoom(saveListener: OnSaveListener) {
-      repository.insertReminder(_reminderConfig.value!!,saveListener)
-    }
+    fun saveReminder() = repository.insertReminder(_reminderConfig.value!!)
+
 
     fun updateReminder(reminder: Reminder) {
         val copy = Reminder(

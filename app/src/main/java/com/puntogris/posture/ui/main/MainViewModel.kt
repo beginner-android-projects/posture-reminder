@@ -2,12 +2,12 @@ package com.puntogris.posture.ui.main
 
 import androidx.lifecycle.*
 import com.puntogris.posture.Alarm
+import com.puntogris.posture.BuildConfig
 import com.puntogris.posture.data.local.DayHistoryDao
-import com.puntogris.posture.data.local.ReminderDao
 import com.puntogris.posture.data.remote.Repository
 import com.puntogris.posture.model.AuthState
-import com.puntogris.posture.model.Reminder
 import com.puntogris.posture.model.Report
+import com.puntogris.posture.utils.DataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,12 +16,26 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
         private val repository: Repository,
         private val alarm: Alarm,
-        private val dayHistoryDao: DayHistoryDao
+        private val dayHistoryDao: DayHistoryDao,
+        private val dataStore: DataStore
     ): ViewModel() {
 
     fun getAuthState(): AuthState {
         return if (repository.restoreLoggedUser() == null) AuthState.AuthRequired
         else AuthState.AuthComplete
+    }
+
+    private val _appVersionStatus = MutableLiveData<Boolean>()
+    val appVersionStatus: LiveData<Boolean>
+        get() = _appVersionStatus
+
+    init {
+        viewModelScope.launch {
+            if (dataStore.lastVersionCode() < BuildConfig.VERSION_CODE) {
+                dataStore.updateLastVersionCode()
+                _appVersionStatus.value = true
+            }
+        }
     }
 
   //  private val _reminder = reminderDao.getReminderConfigLiveData()
@@ -55,6 +69,14 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
          //   reminderDao.enablePandaAnimation()
         }
+    }
+
+    fun closeRealmInstance(){
+        repository.closeRealmInstance()
+    }
+
+    fun instantiateRealmWithCurrentUser(){
+        repository.instantiateRealm()
     }
 
     fun getLastTwoDaysHistory() = dayHistoryDao.getLastTwoEntries()

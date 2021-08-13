@@ -11,9 +11,9 @@ buildscript {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28.3-alpha'
         classpath 'com.google.gms:google-services:4.3.9'
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
-        classpath "io.realm:realm-gradle-plugin:10.7.0"
+        classpath "io.realm:realm-gradle-plugin:10.7.1"
         classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.0"
-
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
     }
 }
 

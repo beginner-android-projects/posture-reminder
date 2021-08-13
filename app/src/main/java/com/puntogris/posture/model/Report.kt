@@ -1,11 +1,11 @@
 package com.puntogris.posture.model
 
 import androidx.annotation.Keep
-import com.google.firebase.Timestamp
+import java.util.*
 
 @Keep
 class Report (
         val username:String,
         val email:String,
         val message:String,
-        val timestamp: Timestamp = Timestamp.now())
+        val date: Date = Date())
