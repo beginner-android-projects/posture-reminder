@@ -9,7 +9,7 @@ open class User(
     @PrimaryKey
     var _id: ObjectId = ObjectId(),
     var name: String = "",
-    var userId: String = "",
+    var _partition: String = "",
     var experience: Int = 0,
     var currentReminderId: Int = 0,
     var creation: Date = Date(),

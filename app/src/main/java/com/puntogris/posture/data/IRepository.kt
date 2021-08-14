@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
 interface IRepository {
-    suspend fun sendReportToFirestore(report: Report): RepoResult
+    suspend fun sendReportToFirestore(ticket: Ticket): RepoResult
     fun getUserFlow(): Flow<User?>
     fun insertReminder(reminder: Reminder): StateFlow<RepoResult>
     fun loginUserWithEmail(userName: String, password: String): StateFlow<LoginResult>
@@ -14,4 +14,6 @@ interface IRepository {
     fun getAllUserRemindersFlow(): Flow<List<Reminder>>
     fun deleteReminder(reminder: Reminder)
     fun instantiateRealm()
+    fun getLastTwoEntries(): Flow<List<DayLog>>
+    fun getTopThreeExpRankings(): Flow<List<User>>
 }

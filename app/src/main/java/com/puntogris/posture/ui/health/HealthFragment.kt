@@ -13,6 +13,12 @@ class HealthFragment : BaseFragment<FragmentHealthBinding>(R.layout.fragment_hea
 
     override fun initializeViews() {
 
+        viewModel.getTopRankingsUsers().observe(viewLifecycleOwner){
+            println(it.size)
+            it.forEach {
+                println(it.name)
+            }
+        }
 
     }
 }

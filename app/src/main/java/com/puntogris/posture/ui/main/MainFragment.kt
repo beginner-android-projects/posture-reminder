@@ -65,9 +65,9 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun subscribeUi(adapter: DayHistoryMainPagerAdapter){
-//        viewModel.getLastTwoDaysHistory().observe(viewLifecycleOwner){
-//            adapter.updateList(it)
-//        }
+        viewModel.getLastTwoDaysHistory().observe(viewLifecycleOwner){
+            adapter.updateList(it)
+        }
     }
 
     fun onCloseCardButtonClicked(){

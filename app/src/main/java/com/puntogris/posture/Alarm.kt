@@ -42,7 +42,6 @@ class Alarm @Inject constructor(@ApplicationContext private val context: Context
             200,
             repeatingAlarmIntent,
             PendingIntent.FLAG_IMMUTABLE
-
     )
 
     fun startDailyAlarm(reminder: Reminder){
@@ -83,5 +82,5 @@ class Alarm @Inject constructor(@ApplicationContext private val context: Context
 
     @RequiresApi(Build.VERSION_CODES.S)
     fun canScheduleExactAlarms() = alarmManager.canScheduleExactAlarms()
-    
+
 }

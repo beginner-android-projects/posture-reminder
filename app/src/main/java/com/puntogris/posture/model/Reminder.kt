@@ -47,7 +47,7 @@ object StringRealmListParceler: Parceler<RealmList<Int>?> {
 @Parcelize
 open class Reminder(
     @PrimaryKey var _id: ObjectId = ObjectId(),
-    var userId: String = "",
+    var _partition: String = "",
     var name: String = "",
     var timeInterval: Int = 0,
     var startTime: Int = 0,

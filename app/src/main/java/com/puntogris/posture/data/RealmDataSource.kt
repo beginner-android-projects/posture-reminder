@@ -1,10 +1,8 @@
 package com.puntogris.posture.data
 
-import android.content.Context
 import com.puntogris.posture.ui.main.realmApp
 import com.puntogris.posture.model.*
 import com.puntogris.posture.utils.userId
-import dagger.hilt.android.qualifiers.ApplicationContext
 import io.realm.Realm
 import io.realm.kotlin.toFlow
 import io.realm.kotlin.where
@@ -13,15 +11,15 @@ import io.realm.mongodb.sync.SyncConfiguration
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RealmDataSource @Inject constructor(
-    @ApplicationContext private val context: Context
-) {
-    //realmApp is initialized in the Application
-    private lateinit var realm: Realm
+class RealmDataSource @Inject constructor() {
+
+    private lateinit var userRealm: Realm
+    private lateinit var sharedRealm: Realm
 
     fun loginWithEmailCredentials(
         userName: String,
@@ -58,32 +56,35 @@ class RealmDataSource @Inject constructor(
     }
 
     private fun instantiateRealm(user: io.realm.mongodb.User) {
-        val configuration = SyncConfiguration
+        val userConfiguration = SyncConfiguration
             .Builder(user, realmApp.userId())
             .build()
 
-        realm = Realm.getInstance(configuration)
+        val sharedConfiguration = SyncConfiguration
+            .Builder(user, "shared")
+            .build()
+
+        userRealm = Realm.getInstance(userConfiguration)
+        sharedRealm = Realm.getInstance(sharedConfiguration)
     }
 
     fun getCurrentUserData(): Flow<User?> {
-        return realm.where<User>()
-            .equalTo("userId", realmApp.userId())
+        return userRealm.where<User>()
             .findFirstAsync()
             .toFlow()
     }
 
     fun getAllUserReminders(): Flow<List<Reminder>>{
-        return realm.where<Reminder>()
-            .equalTo("userId", realmApp.userId())
+        return userRealm.where<Reminder>()
             .findAll()
             .toFlow()
     }
 
     fun insertReminderWithTransaction(reminder: Reminder): StateFlow<RepoResult> {
         return MutableStateFlow<RepoResult>(RepoResult.InProgress).also { result ->
-            realm.executeTransactionAsync(
+            userRealm.executeTransactionAsync(
                 {
-                    reminder.userId = realmApp.userId()
+                    reminder._partition = realmApp.userId()
                     it.insertOrUpdate(reminder)
                 },
                 { result.value = RepoResult.Success },
@@ -92,13 +93,11 @@ class RealmDataSource @Inject constructor(
         }
     }
 
-
     fun deleteReminderWithTransaction(reminder: Reminder){
-        realm.executeTransactionAsync {
+        userRealm.executeTransactionAsync {
             it.where<Reminder>().equalTo("_id", reminder._id).findFirst()?.deleteFromRealm()
         }
     }
-
 
     fun instantiateRealmWithCurrentUser(){
         realmApp.currentUser()?.let {
@@ -106,8 +105,23 @@ class RealmDataSource @Inject constructor(
         }
     }
 
+    fun getLastTwoDaysHistory(): Flow<List<DayLog>>{
+        return userRealm.where<DayLog>()
+            .greaterThan("date", Date())
+            .limit(2)
+            .findAllAsync()
+            .toFlow()
+    }
+
+    fun getTopThreeRankings(): Flow<List<User>>{
+        return sharedRealm.where<User>()
+            .limit(3)
+            .findAll()
+            .toFlow()
+    }
 
     fun closeRealm(){
-        realm.close()
+        userRealm.close()
+        sharedRealm.close()
     }
 }

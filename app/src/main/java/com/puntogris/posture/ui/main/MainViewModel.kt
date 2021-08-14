@@ -5,7 +5,7 @@ import com.puntogris.posture.Alarm
 import com.puntogris.posture.BuildConfig
 import com.puntogris.posture.data.Repository
 import com.puntogris.posture.model.AuthState
-import com.puntogris.posture.model.Report
+import com.puntogris.posture.model.Ticket
 import com.puntogris.posture.utils.DataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -77,8 +77,8 @@ class MainViewModel @Inject constructor(
         repository.instantiateRealm()
     }
 
-    //fun getLastTwoDaysHistory() = dayHistoryDao.getLastTwoEntries()
+    fun getLastTwoDaysHistory() = repository.getLastTwoEntries().asLiveData()
 
-    suspend fun sendReport(report:Report) = repository.sendReportToFirestore(report)
+    suspend fun sendReport(ticket:Ticket) = repository.sendReportToFirestore(ticket)
 
 }

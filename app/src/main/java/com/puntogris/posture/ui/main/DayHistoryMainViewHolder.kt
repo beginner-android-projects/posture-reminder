@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.puntogris.posture.databinding.DayHistoryMainPagerItemBinding
-import com.puntogris.posture.model.DayHistory
+import com.puntogris.posture.model.DayLog
 
 class DayHistoryMainViewHolder(private val binding: DayHistoryMainPagerItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(dayHistory: DayHistory, position: Int){
+    fun bind(dayHistory: DayLog, position: Int){
         binding.dayHistory = dayHistory
         binding.position = position
         binding.executePendingBindings()

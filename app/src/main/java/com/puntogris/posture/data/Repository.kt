@@ -1,7 +1,7 @@
 package com.puntogris.posture.data
 
 import com.puntogris.posture.model.Reminder
-import com.puntogris.posture.model.Report
+import com.puntogris.posture.model.Ticket
 import com.puntogris.posture.model.RepoResult
 import com.puntogris.posture.model.User
 import kotlinx.coroutines.flow.*
@@ -33,9 +33,8 @@ class Repository @Inject constructor(
         realmDataSource.instantiateRealmWithCurrentUser()
     }
 
-    override suspend fun sendReportToFirestore(report: Report): RepoResult {
+    override suspend fun sendReportToFirestore(ticket: Ticket): RepoResult {
         return try {
-           // firestore.collection(BUG_REPORT_COLLECTION_NAME).document().set(report).await()
             RepoResult.Success
         }catch (e:Exception){
             RepoResult.Error
@@ -53,5 +52,9 @@ class Repository @Inject constructor(
     fun closeRealmInstance(){
         realmDataSource.closeRealm()
     }
+
+    override fun getLastTwoEntries() = realmDataSource.getLastTwoDaysHistory()
+
+    override fun getTopThreeExpRankings() = realmDataSource.getTopThreeRankings()
 
 }

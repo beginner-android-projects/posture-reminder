@@ -24,7 +24,7 @@ class ManageRemindersViewModel @Inject constructor(
         val copy = Reminder(
             _id = reminder._id,
             name = reminder.name,
-            userId = reminder.userId,
+            _partition = reminder._partition,
             timeInterval = reminder.timeInterval,
             startTime = reminder.startTime,
             endTime = reminder.endTime,
