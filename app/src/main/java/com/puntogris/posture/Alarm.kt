@@ -11,9 +11,11 @@ import com.puntogris.posture.utils.Utils.getTriggerTime
 import com.puntogris.posture.utils.getHours
 import com.puntogris.posture.utils.getMinutes
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.DelicateCoroutinesApi
 import java.util.*
 import javax.inject.Inject
 
+@DelicateCoroutinesApi
 class Alarm @Inject constructor(@ApplicationContext private val context: Context) {
 
     private val alarmManager: AlarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager

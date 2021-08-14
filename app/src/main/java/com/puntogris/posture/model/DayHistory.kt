@@ -1,25 +1,15 @@
 package com.puntogris.posture.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import org.bson.types.ObjectId
 import org.threeten.bp.LocalDate
 
-@Entity
-data class DayHistory(
-
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
-
-    @ColumnInfo
-    val expGained: Int = 0,
-
-    @ColumnInfo
-    val notifications: Int = 0,
-
-    @ColumnInfo
-    val exercises: Int = 0,
-
-    @ColumnInfo
-    val date: String = LocalDate.now().toString()
-)
+open class DayHistory(
+    @PrimaryKey
+    var _id: ObjectId = ObjectId.get(),
+    var expGained: Int = 0,
+    var notifications: Int = 0,
+    var exercises: Int = 0,
+    var date: String = LocalDate.now().toString()
+): RealmObject()

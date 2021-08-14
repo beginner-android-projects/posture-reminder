@@ -1,31 +1,18 @@
 package com.puntogris.posture.ui.account
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.puntogris.posture.R
 import com.puntogris.posture.databinding.FragmentAccountBinding
-import com.puntogris.posture.di.realmApp
 import com.puntogris.posture.model.DayHistory
 import com.puntogris.posture.ui.base.BaseFragment
-import com.puntogris.posture.utils.capitalizeFirstChar
 import com.puntogris.posture.utils.getDayStringFormatted
 import com.puntogris.posture.utils.showItem
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
-import org.threeten.bp.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class AccountFragment : BaseFragment<FragmentAccountBinding>(R.layout.fragment_account) {

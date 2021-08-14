@@ -5,16 +5,9 @@ import android.view.*
 import androidx.fragment.app.activityViewModels
 import com.puntogris.posture.R
 import com.puntogris.posture.databinding.FragmentMainBinding
-import com.puntogris.posture.di.realmApp
-import com.puntogris.posture.model.User
 import com.puntogris.posture.ui.base.BaseFragment
 import com.puntogris.posture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import io.realm.Realm
-import io.realm.kotlin.toFlow
-import io.realm.mongodb.sync.SyncConfiguration
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 
 @AndroidEntryPoint
 class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
@@ -51,9 +44,9 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun subscribeUi(adapter: DayHistoryMainPagerAdapter){
-        viewModel.getLastTwoDaysHistory().observe(viewLifecycleOwner){
-            adapter.updateList(it)
-        }
+//        viewModel.getLastTwoDaysHistory().observe(viewLifecycleOwner){
+//            adapter.updateList(it)
+//        }
     }
 
     fun onCloseCardButtonClicked(){

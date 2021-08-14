@@ -6,7 +6,8 @@ import org.bson.types.ObjectId
 import java.util.*
 
 open class User(
-    @PrimaryKey var _id: ObjectId = ObjectId(),
+    @PrimaryKey
+    var _id: ObjectId = ObjectId(),
     var name: String = "",
     var userId: String = "",
     var experience: Int = 0,

@@ -1,25 +1,18 @@
-package com.puntogris.posture.data.remote
+package com.puntogris.posture.data
 
 import android.content.Context
-import com.puntogris.posture.data.OnSaveListener
-import com.puntogris.posture.di.realmApp
+import com.puntogris.posture.ui.main.realmApp
 import com.puntogris.posture.model.*
 import com.puntogris.posture.utils.userId
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.realm.Realm
-import io.realm.RealmList
-import io.realm.kotlin.delete
 import io.realm.kotlin.toFlow
 import io.realm.kotlin.where
-import io.realm.mongodb.AppException
 import io.realm.mongodb.Credentials
 import io.realm.mongodb.sync.SyncConfiguration
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flowOn
-import org.bson.Document
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -10,4 +10,4 @@ import kotlinx.parcelize.Parcelize
 open class Sound(
     var title: String = "",
     var uri: String = ""
-    ): RealmObject(), Parcelable
+): RealmObject(), Parcelable

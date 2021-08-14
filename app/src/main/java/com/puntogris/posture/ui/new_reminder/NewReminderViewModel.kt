@@ -1,8 +1,7 @@
 package com.puntogris.posture.ui.new_reminder
 
 import androidx.lifecycle.*
-import com.puntogris.posture.data.OnSaveListener
-import com.puntogris.posture.data.remote.Repository
+import com.puntogris.posture.data.Repository
 import com.puntogris.posture.model.Reminder
 import com.puntogris.posture.model.Sound
 import com.puntogris.posture.utils.*

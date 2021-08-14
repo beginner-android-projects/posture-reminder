@@ -2,11 +2,11 @@ package com.puntogris.posture.ui.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.puntogris.posture.data.OnSaveListener
-import com.puntogris.posture.data.local.ReminderDao
-import com.puntogris.posture.data.remote.Repository
+import com.puntogris.posture.data.Repository
 import com.puntogris.posture.model.Reminder
+import com.puntogris.posture.model.RepoResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +20,7 @@ class ManageRemindersViewModel @Inject constructor(
         repository.deleteReminder(reminder)
     }
 
-    fun insertReminder(reminder: Reminder) {
+    fun insertReminder(reminder: Reminder): StateFlow<RepoResult> {
         val copy = Reminder(
             _id = reminder._id,
             name = reminder.name,
@@ -33,7 +33,7 @@ class ManageRemindersViewModel @Inject constructor(
             vibrationPattern = reminder.vibrationPattern,
             sound = reminder.sound
         )
-        repository.insertReminder(copy)
+        return repository.insertReminder(copy)
 
     }
 

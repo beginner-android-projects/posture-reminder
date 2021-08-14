@@ -13,7 +13,6 @@ import com.puntogris.posture.ui.base.BaseActivity
 import com.puntogris.posture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 import androidx.activity.viewModels
 import com.puntogris.posture.model.AuthState
 import kotlinx.coroutines.*

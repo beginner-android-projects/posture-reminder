@@ -3,8 +3,7 @@ package com.puntogris.posture.ui.main
 import androidx.lifecycle.*
 import com.puntogris.posture.Alarm
 import com.puntogris.posture.BuildConfig
-import com.puntogris.posture.data.local.DayHistoryDao
-import com.puntogris.posture.data.remote.Repository
+import com.puntogris.posture.data.Repository
 import com.puntogris.posture.model.AuthState
 import com.puntogris.posture.model.Report
 import com.puntogris.posture.utils.DataStore
@@ -14,10 +13,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-        private val repository: Repository,
-        private val alarm: Alarm,
-        private val dayHistoryDao: DayHistoryDao,
-        private val dataStore: DataStore
+    private val repository: Repository,
+    private val alarm: Alarm,
+    private val dataStore: DataStore
     ): ViewModel() {
 
     fun getAuthState(): AuthState {
@@ -79,7 +77,7 @@ class MainViewModel @Inject constructor(
         repository.instantiateRealm()
     }
 
-    fun getLastTwoDaysHistory() = dayHistoryDao.getLastTwoEntries()
+    //fun getLastTwoDaysHistory() = dayHistoryDao.getLastTwoEntries()
 
     suspend fun sendReport(report:Report) = repository.sendReportToFirestore(report)
 

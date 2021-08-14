@@ -1,4 +1,4 @@
-package com.puntogris.posture.data.remote
+package com.puntogris.posture.data
 
 import com.puntogris.posture.model.Reminder
 import com.puntogris.posture.model.Report
@@ -9,8 +9,8 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    private val realmDataSource: RealmDataSource): IRepository {
-
+    private val realmDataSource: RealmDataSource
+): IRepository {
 
     override fun loginUserWithEmail(userName: String, password: String) =
         realmDataSource.loginWithEmailCredentials(userName, password)

@@ -14,9 +14,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.puntogris.posture.R
 import com.puntogris.posture.databinding.FragmentLoginBinding
-import com.puntogris.posture.di.realmApp
 import com.puntogris.posture.model.LoginResult
 import com.puntogris.posture.ui.base.BaseFragment
+import com.puntogris.posture.ui.main.realmApp
 import com.puntogris.posture.utils.createSnackBar
 import com.puntogris.posture.utils.gone
 import com.puntogris.posture.utils.visible

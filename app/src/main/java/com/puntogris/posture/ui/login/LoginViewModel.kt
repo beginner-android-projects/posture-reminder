@@ -1,7 +1,7 @@
 package com.puntogris.posture.ui.login
 
 import androidx.lifecycle.ViewModel
-import com.puntogris.posture.data.remote.Repository
+import com.puntogris.posture.data.Repository
 import com.puntogris.posture.model.LoginResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow

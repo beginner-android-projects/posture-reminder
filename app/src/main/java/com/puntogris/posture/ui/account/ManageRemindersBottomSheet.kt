@@ -1,19 +1,15 @@
 package com.puntogris.posture.ui.account
 
-import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.puntogris.posture.R
-import com.puntogris.posture.data.OnSaveListener
 import com.puntogris.posture.databinding.BottomSheetManageRemindersBinding
 import com.puntogris.posture.model.Reminder
+import com.puntogris.posture.model.RepoResult
 import com.puntogris.posture.ui.base.BaseBottomSheetFragment
 import com.puntogris.posture.utils.createSnackBar
+import com.puntogris.posture.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -59,26 +55,22 @@ class ManageRemindersBottomSheet: BaseBottomSheetFragment<BottomSheetManageRemin
 
     private fun onDeleteReminder(reminder: Reminder) {
         viewModel.deleteReminder(reminder)
-        Snackbar.make(
-            dialog?.window!!.decorView,
-            getString(R.string.snack_delete_reminder_success),
-            Snackbar.LENGTH_LONG
-        )
-            .setAnchorView(binding.floatingActionButton)
-            .setAction(getString(R.string.action_undo)) {
+        showSnackBar(
+            message = R.string.snack_delete_reminder_success,
+            anchorView = binding.floatingActionButton,
+            actionText = R.string.action_undo){
+            lifecycleScope.launch {
+                viewModel.insertReminder(reminder).collect {
+                    when(it){
+                        RepoResult.Error -> {}
+                        RepoResult.InProgress -> {}
+                        RepoResult.Success -> {
 
-                viewModel.insertReminder(reminder, object : OnSaveListener{
-                    override fun onSuccess() {
-                        println("yY")
+                        }
                     }
-
-                    override fun onError(it: Throwable) {
-                        println(it.localizedMessage)
-                    }
-                })
-
-            }.show()
-
+                }
+            }
+        }
     }
 
     fun onNewReminder(){

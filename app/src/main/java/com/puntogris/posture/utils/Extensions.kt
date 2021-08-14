@@ -4,38 +4,27 @@ import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.os.PowerManager
 import android.view.Menu
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.puntogris.posture.R
-import com.puntogris.posture.di.realmApp
-import com.puntogris.posture.model.Reminder
-import com.puntogris.posture.utils.Utils.minutesFromMidnightToHourlyTime
 import io.realm.mongodb.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
@@ -141,3 +130,17 @@ fun BroadcastReceiver.goAsync(
 }
 
 fun App.userId() = currentUser()?.id.toString()
+
+fun BottomSheetDialogFragment.showSnackBar(
+    @StringRes message: Int,
+    duration: Int = Snackbar.LENGTH_LONG,
+    anchorView: View? = null,
+    actionText: Int = R.string.action_undo,
+    actionListener: View.OnClickListener? = null
+){
+    Snackbar.make(dialog?.window!!.decorView, message, duration).let {
+        if (anchorView != null) it.anchorView = anchorView
+        if (actionListener != null) it.setAction(actionText, actionListener)
+        it.show()
+    }
+}

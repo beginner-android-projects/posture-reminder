@@ -1,4 +1,4 @@
-package com.puntogris.posture.di
+package com.puntogris.posture.ui.main
 
 import android.app.Application
 import android.app.NotificationChannel
@@ -6,11 +6,9 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.util.Log
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.puntogris.posture.BuildConfig
-import com.puntogris.posture.data.remote.RealmDataSource
+import com.puntogris.posture.data.RealmDataSource
 import com.puntogris.posture.utils.Constants
 import dagger.hilt.android.HiltAndroidApp
 import io.realm.Realm
@@ -23,8 +21,6 @@ lateinit var realmApp: App
 @HiltAndroidApp
 class App: Application(){
 
-    @Inject lateinit var realmDataSource: RealmDataSource
-    var realm : Realm? = null
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
