@@ -1,17 +1,25 @@
 package com.puntogris.posture.ui.main
 
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
 import android.view.*
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import com.puntogris.posture.R
 import com.puntogris.posture.databinding.FragmentMainBinding
 import com.puntogris.posture.ui.base.BaseFragment
 import com.puntogris.posture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.jar.Manifest
 
 @AndroidEntryPoint
 class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
+    lateinit var requestPermissionLauncher: ActivityResultLauncher<Intent>
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun initializeViews() {
@@ -29,6 +37,19 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             binding.enableTextView.text = if (c == 0) "Activar" else "Desactivar"
 
           //  binding.circleButton.setShapeType(c)
+        }
+
+
+        // talvez cambiar de lugar esto, en welcome fragment o algo asi
+        requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { isGranted ->
+                //activate alarm
+            }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            requestPermissionLauncher.launch(Intent(ACTION_REQUEST_SCHEDULE_EXACT_ALARM).also {
+                it.data = Uri.parse("package:com.puntogris.posture")
+            })
         }
 
     }

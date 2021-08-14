@@ -4,6 +4,8 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.puntogris.posture.model.Reminder
 import com.puntogris.posture.utils.Constants.DAILY_ALARM_TRIGGERED
 import com.puntogris.posture.utils.Constants.REPEATING_ALARM_TRIGGERED
@@ -32,14 +34,15 @@ class Alarm @Inject constructor(@ApplicationContext private val context: Context
             context,
             100,
             dailyAlarmIntent,
-            0
+            PendingIntent.FLAG_IMMUTABLE
     )
 
     private val pendingIntentRepeatingAlarm = PendingIntent.getBroadcast(
             context,
             200,
             repeatingAlarmIntent,
-            0
+            PendingIntent.FLAG_IMMUTABLE
+
     )
 
     fun startDailyAlarm(reminder: Reminder){
@@ -78,4 +81,7 @@ class Alarm @Inject constructor(@ApplicationContext private val context: Context
         alarmManager.cancel(pendingIntentRepeatingAlarm)
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
+    fun canScheduleExactAlarms() = alarmManager.canScheduleExactAlarms()
+    
 }

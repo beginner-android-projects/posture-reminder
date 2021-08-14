@@ -1,6 +1,7 @@
 package com.puntogris.posture.ui.login
 
 import android.app.Activity
+import android.app.PendingIntent
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -69,6 +70,7 @@ class LoginFragment :BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
             .build()
 
         val mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+
         activityResultLauncher.launch(mGoogleSignInClient.signInIntent)
 
     }
