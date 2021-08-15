@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/mainFragment">
 
-<fragment
+    <fragment
         android:id="@+id/mainFragment"
         android:name="com.puntogris.posture.ui.main.MainFragment" />
     <fragment
@@ -34,7 +33,8 @@
     </fragment>
     <dialog
         android:id="@+id/settingsBottomSheet"
-        android:name="com.puntogris.posture.ui.settings.SettingsBottomSheet" >
+        android:name="com.puntogris.posture.ui.settings.SettingsBottomSheet"
+        android:label="" >
         <action
             android:id="@+id/action_settingsBottomSheet_to_dialogName"
             app:destination="@id/dialogName" />
@@ -82,26 +82,23 @@
         android:id="@+id/soundSelectorDialog"
         android:name="com.puntogris.posture.ui.new_reminder.SoundSelectorDialog">
         <argument
-            android:name="sound"
-            app:argType="com.puntogris.posture.model.Sound" />
+            android:name="savedSound"
+            app:argType="string"
+            android:defaultValue=" " />
     </dialog>
     <dialog
         android:id="@+id/whatsNewDialog"
         android:name="com.puntogris.posture.ui.main.WhatsNewDialog" />
     <fragment
-        android:id="@+id/portalFragment"
-        android:name="com.puntogris.posture.ui.portal.PortalFragment">
-        <action
-            android:id="@+id/action_portalFragment_to_rankingsFragment"
-            app:destination="@id/rankingsFragment" />
-    </fragment>
+        android:id="@+id/healthFragment"
+        android:name="com.puntogris.posture.ui.portal.PortalFragment"/>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.puntogris.posture.ui.login.LoginFragment"/>
+        android:name="com.puntogris.posture.ui.login.LoginFragment" />
+    <fragment
+        android:id="@+id/rankingsFragment"
+        android:name="com.puntogris.posture.ui.rankings.RankingsFragment"/>
     <fragment
         android:id="@+id/loginWithEmailFragment"
         android:name="com.puntogris.posture.ui.login.LoginWithEmailFragment" />
-    <fragment
-        android:id="@+id/rankingsFragment"
-        android:name="com.puntogris.posture.ui.rankings.RankingsFragment" />
 </navigation>

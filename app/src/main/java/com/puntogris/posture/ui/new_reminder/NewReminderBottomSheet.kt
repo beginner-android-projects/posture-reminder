@@ -18,8 +18,6 @@ import com.maxkeppeler.sheets.time_clock.ClockTimeSheet
 import com.puntogris.posture.R
 import com.puntogris.posture.databinding.BottomSheetNewReminderBinding
 import com.puntogris.posture.model.ReminderUi
-import com.puntogris.posture.model.RepoResult
-import com.puntogris.posture.model.Sound
 import com.puntogris.posture.ui.base.BaseBottomSheetFragment
 import com.puntogris.posture.utils.Constants.DATA_KEY
 import com.puntogris.posture.utils.Constants.INTERVAL_KEY
@@ -29,7 +27,6 @@ import com.puntogris.posture.utils.Constants.VIBRATION_PICKER_KEY
 import com.puntogris.posture.utils.Utils
 import com.puntogris.posture.utils.createSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -51,17 +48,13 @@ class NewReminderBottomSheet : BaseBottomSheetFragment<BottomSheetNewReminderBin
             subscribeUi(it)
         }
 
-        args.reminder?.let {
-            viewModel.updateReminder(it)
-        }
+        args.reminder?.let { viewModel.updateReminder(it) }
 
         setFragmentResultListener(VIBRATION_PICKER_KEY){ _, bundle ->
             viewModel.saveReminderVibrationPattern(bundle.getInt(DATA_KEY))
         }
         setFragmentResultListener(SOUND_PICKER_KEY){ _, bundle ->
-            bundle.getParcelable<Sound>(DATA_KEY)?.let {
-                viewModel.saveReminderSoundPattern(it)
-            }
+            viewModel.saveReminderSoundPattern(bundle.getParcelable(DATA_KEY))
         }
     }
 
@@ -73,16 +66,9 @@ class NewReminderBottomSheet : BaseBottomSheetFragment<BottomSheetNewReminderBin
 
     fun onSaveReminder() {
         lifecycleScope.launch {
-            viewModel.saveReminder().collect {
-                when(it){
-                    RepoResult.Error -> {}
-                    RepoResult.InProgress -> {}
-                    RepoResult.Success -> {
-                        createSnackBar(getString(R.string.snack_reminder_created_success))
-                        findNavController().navigateUp()
-                    }
-                }
-            }
+            viewModel.saveReminderRoom()
+            createSnackBar(getString(R.string.snack_reminder_created_success))
+            findNavController().navigateUp()
         }
     }
 
@@ -101,7 +87,7 @@ class NewReminderBottomSheet : BaseBottomSheetFragment<BottomSheetNewReminderBin
 
     private fun onSoundPicker(){
         val action = NewReminderBottomSheetDirections
-            .actionNewReminderBottomSheetToSoundSelectorDialog(viewModel.reminder.value!!.sound ?: Sound())
+            .actionNewReminderBottomSheetToSoundSelectorDialog(viewModel.reminder.value!!.soundUri)
         findNavController().navigate(action)    }
 
     private fun onVibrationPicker(){

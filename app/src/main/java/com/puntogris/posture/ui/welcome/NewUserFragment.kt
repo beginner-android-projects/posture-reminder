@@ -21,7 +21,7 @@ class NewUserFragment : BaseFragment<FragmentNewUserBinding>(R.layout.fragment_n
 
     fun onContinueButtonClicked(){
         lifecycleScope.launch {
-        //    viewModel.updateUsername(binding.username.text.toString())
+            viewModel.updateUsername(binding.username.text.toString())
             findNavController().navigate(R.id.action_newUserFragment_to_batteryOptimizationFragment)
         }
     }

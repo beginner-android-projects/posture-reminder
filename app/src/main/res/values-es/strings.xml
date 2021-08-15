@@ -7,6 +7,7 @@
     <string name="start_alarm">Activar</string>
     <string name="alarm_off">La app esta desactivada</string>
     <string name="alarm_on">La app esta activada</string>
+    <string name="close_card_content_des">Cerrar tarjeta</string>
     <string name="background_image_content_descr">Imagen de fondo</string>
 
     <!--Settings Screen-->
@@ -83,50 +84,6 @@
         <item>Escalera</item>
         <item>Rápido</item>
     </string-array>
-    <string name="snack_delete_reminder_success">Recordatorio eliminado</string>
-    <string name="snack_configuration_updated">Ajustes actualizados</string>
-    <string name="name">Nombre</string>
-    <string name="reminder_name">Nombre del recordatorio</string>
-    <string name="interval">Intervalo</string>
-    <string name="days">Dias</string>
-    <string name="start_time">Inciar</string>
-    <string name="end_time">Finalizar</string>
-    <string name="sound">Sonido</string>
-    <string name="vibration">Vibracion</string>
-    <string name="disabled">Desactivado</string>
-    <string name="enabled">Activado</string>
-    <string name="color_picker_title">Color del recordatorio</string>
-    <string name="vibration_picker_title">Vibracion</string>
-    <string name="sound_tone_item_none">Ninguno</string>
-    <string name="sound_picker_title">Sonido</string>
-    <string name="snack_reminder_created_success">Recordatorio creado satisfactoriamente</string>
-    <string name="experience">Experiencia</string>
-    <string name="exercises">Ejercicios</string>
-
-    <!--    <string name="updated_version">Updated to v%1$s</string>-->
-    <string name="updated_version">Actualizado a v%1$s</string>
-
-    <string name="whats_new">Qué hay de nuevo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <!-- Navigation -->
-    <string name="home_label">Inicio</string>
-    <string name="health_label">Salud</string>
-    <string name="account_label">Cuenta</string>
-    <string name="create_reminder_label">Nuevo recordatorio</string>
-
-    <!-- Actions -->
-    <string name="action_done">Listo</string>
-    <string name="action_delete">Eliminar</string>
-    <string name="action_undo">Deshacer</string>
-    <string name="action_finish">Finalizar</string>
-    <string name="action_disable">Desactivar</string>
-
-    <!-- Welcome -->
-    <string name="welcome_pager_title1">Vivi al maximo!</string>
-    <string name="welcome_pager_title2">Adios a los dolores de espalda!</string>
-    <string name="welcome_pager_title3">Aprovechar de leer un buen libro!</string>
 
 
 </resources>

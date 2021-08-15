@@ -30,5 +30,4 @@ object Constants {
     const val APP_THEME = "pref_app_theme"
 
 
-
 }

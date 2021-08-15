@@ -1,7 +1,6 @@
 package com.puntogris.posture.utils
 
 import com.maxkeppeler.sheets.options.Option
-import java.io.Serializable
 import java.util.*
 
 object Utils {

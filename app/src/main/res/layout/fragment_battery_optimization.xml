@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/dayBackground"
         tools:context=".ui.welcome.BatteryOptimizationFragment">
 
         <androidx.constraintlayout.widget.Group
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
             android:layout_marginTop="32dp"
+            android:textColor="@color/material_grey_600"
             android:text="Para un mejor funcionamiento de la aplicacion te pedimos que desactives la optimizacion de bateria en respecto a nuestra aplicacion.\n\nNo te preocupes no gastaremos mucha bateria."
             android:textAlignment="center"
             android:textSize="13sp"
@@ -94,6 +96,7 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-medium"
             android:text="Estado:"
+            android:textColor="@color/material_grey_600"
             android:textSize="13sp"
             app:layout_constraintEnd_toStartOf="@+id/powerManagerState"
             app:layout_constraintHorizontal_bias="0.5"
@@ -107,6 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="Requiere accion"
+            android:textColor="@color/material_grey_600"
             app:layout_constraintBottom_toBottomOf="@+id/textView37"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -129,6 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Pasos"
+            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
@@ -141,6 +146,7 @@
             android:layout_height="8dp"
             android:layout_marginTop="24dp"
             android:alpha="0.2"
+            android:background="@color/grey"
             android:elevation="1dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView37" />
@@ -150,6 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:textColor="@color/material_grey_600"
             android:textAlignment="center"
             android:layout_marginHorizontal="32dp"
             android:text="* Esto no es obligatorio, pero puede que no todas las notificaciones sean ejecutadas."

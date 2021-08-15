@@ -1,18 +1,24 @@
 package com.puntogris.posture.model
 
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
-import org.bson.types.ObjectId
-import java.util.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-open class User(
-    @PrimaryKey
-    var _id: ObjectId = ObjectId(),
-    var name: String = "",
-    var _partition: String = "",
-    var experience: Int = 0,
-    var currentReminderId: Int = 0,
-    var creation: Date = Date(),
-    var email: String = "",
-    var country: String = ""
-): RealmObject()
+@Entity
+class User(
+
+    @PrimaryKey(autoGenerate = false)
+    val userId: Int = 1,
+
+    @ColumnInfo
+    val name: String,
+
+    @ColumnInfo
+    val level: Int,
+
+    @ColumnInfo
+    val experience: Int,
+
+    @ColumnInfo
+    val currentReminderId: Int
+)

@@ -1,25 +1,23 @@
 package com.puntogris.posture.ui.main
 
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
 import android.view.*
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.borutsky.neumorphism.NeumorphicFrameLayout
 import com.puntogris.posture.R
+import com.puntogris.posture.data.local.UserDao
 import com.puntogris.posture.databinding.FragmentMainBinding
+import com.puntogris.posture.ui.MainViewModel
 import com.puntogris.posture.ui.base.BaseFragment
 import com.puntogris.posture.utils.*
+import com.puntogris.posture.utils.Utils.minutesFromMidnightToHourlyTime
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.jar.Manifest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
-    lateinit var requestPermissionLauncher: ActivityResultLauncher<Intent>
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun initializeViews() {
@@ -31,6 +29,13 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         }
         setupPager()
 
+       // binding.pandaAnimation.setMinAndMaxFrame(44, 74)
+
+       // binding.pandaAnimation.setMaxFrame(31,61)
+
+        //val asd = binding.pandaAnimation.frame
+      //  println(asd)
+
         var c = 0
         binding.circleButton.setOnClickListener {
             c = if (c == 0) 1 else 0
@@ -39,18 +44,6 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
           //  binding.circleButton.setShapeType(c)
         }
 
-
-        // talvez cambiar de lugar esto, en welcome fragment o algo asi
-        requestPermissionLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { isGranted ->
-                //activate alarm
-            }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            requestPermissionLauncher.launch(Intent(ACTION_REQUEST_SCHEDULE_EXACT_ALARM).also {
-                it.data = Uri.parse("package:com.puntogris.posture")
-            })
-        }
 
     }
 
@@ -74,6 +67,9 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
        // binding.announcementCard.gone()
     }
 
+    fun onOpenAnnouncementClicked(){
+        findNavController().navigate(R.id.announcementFragment)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -87,18 +83,18 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     fun onScreenClicked(){
-       // if (viewModel.isAppActive()) {
-     //       viewModel.cancelAlarms()
-     //       createSnackBar(getString(R.string.alarms_off_toast))
-    //    }
-   //     else {
-     //       viewModel.startAlarm()
-   //         createSnackBar(getString(
-        //        R.string.notifications_set_toast,
-       //         minutesFromMidnightToHourlyTime(viewModel.reminder.value!!.startTime),
-      //          minutesFromMidnightToHourlyTime(viewModel.reminder.value!!.endTime)
-     //       ))
-    //    }
+        if (viewModel.isAppActive()) {
+            viewModel.cancelAlarms()
+            createSnackBar(getString(R.string.alarms_off_toast))
+        }
+        else {
+            viewModel.startAlarm()
+            createSnackBar(getString(
+                R.string.notifications_set_toast,
+                minutesFromMidnightToHourlyTime(viewModel.reminder.value!!.startTime),
+                minutesFromMidnightToHourlyTime(viewModel.reminder.value!!.endTime)
+            ))
+        }
       //  binding.enableSummaryTextview.playShakeAnimation()
      //   binding.enableTextView.playShakeAnimation()
     }

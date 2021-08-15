@@ -11,7 +11,7 @@
             type="com.puntogris.posture.ui.main.MainFragment" />
         <variable
             name="viewModel"
-            type="com.puntogris.posture.ui.main.MainViewModel" />
+            type="com.puntogris.posture.ui.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

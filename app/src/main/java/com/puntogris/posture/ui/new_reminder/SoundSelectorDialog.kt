@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.puntogris.posture.R
-import com.puntogris.posture.model.Sound
+import com.puntogris.posture.model.ToneItem
 import com.puntogris.posture.utils.Constants.DATA_KEY
 import com.puntogris.posture.utils.Constants.SOUND_PICKER_KEY
 import java.util.ArrayList
@@ -26,7 +26,7 @@ class SoundSelectorDialog: DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val tones = listRingTones()
         val stringTones = tones.map { it.title }.toTypedArray()
-        val matchLastPosition = listRingTones().indexOfFirst {  it.uri == args.sound.uri }
+        val matchLastPosition = listRingTones().indexOfFirst {  it.uri == args.savedSound }
         val lastPosition = if (matchLastPosition == -1) 0 else matchLastPosition
 
         return MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialog_rounded)
@@ -45,18 +45,18 @@ class SoundSelectorDialog: DialogFragment() {
             .create()
     }
 
-    private fun listRingTones(): ArrayList<Sound> {
+    private fun listRingTones(): ArrayList<ToneItem> {
         val manager = RingtoneManager(requireContext())
         manager.setType(RingtoneManager.TYPE_NOTIFICATION)
-        val toneItems = ArrayList<Sound>()
-        toneItems.add(Sound(getString(R.string.sound_tone_item_none), "/"))
+        val toneItems = ArrayList<ToneItem>()
+        toneItems.add(ToneItem(getString(R.string.sound_tone_item_none), "/"))
 
         manager.cursor?.let {
             while (it.moveToNext()) {
                 val id = it.getString(RingtoneManager.ID_COLUMN_INDEX)
                 val title = it.getString(RingtoneManager.TITLE_COLUMN_INDEX)
                 val uri = it.getString(RingtoneManager.URI_COLUMN_INDEX)
-                val toneItem = Sound(title, "$uri/$id")
+                val toneItem = ToneItem(title, "$uri/$id")
                 toneItems.add(toneItem)
             }
         }

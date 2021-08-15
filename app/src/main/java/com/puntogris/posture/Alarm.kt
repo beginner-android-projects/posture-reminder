@@ -4,8 +4,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.puntogris.posture.model.Reminder
 import com.puntogris.posture.utils.Constants.DAILY_ALARM_TRIGGERED
 import com.puntogris.posture.utils.Constants.REPEATING_ALARM_TRIGGERED
@@ -13,11 +11,9 @@ import com.puntogris.posture.utils.Utils.getTriggerTime
 import com.puntogris.posture.utils.getHours
 import com.puntogris.posture.utils.getMinutes
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.DelicateCoroutinesApi
 import java.util.*
 import javax.inject.Inject
 
-@DelicateCoroutinesApi
 class Alarm @Inject constructor(@ApplicationContext private val context: Context) {
 
     private val alarmManager: AlarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -34,14 +30,14 @@ class Alarm @Inject constructor(@ApplicationContext private val context: Context
             context,
             100,
             dailyAlarmIntent,
-            PendingIntent.FLAG_IMMUTABLE
+            0
     )
 
     private val pendingIntentRepeatingAlarm = PendingIntent.getBroadcast(
             context,
             200,
             repeatingAlarmIntent,
-            PendingIntent.FLAG_IMMUTABLE
+            0
     )
 
     fun startDailyAlarm(reminder: Reminder){
@@ -79,8 +75,5 @@ class Alarm @Inject constructor(@ApplicationContext private val context: Context
     fun cancelRepeatingAlarm() {
         alarmManager.cancel(pendingIntentRepeatingAlarm)
     }
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    fun canScheduleExactAlarms() = alarmManager.canScheduleExactAlarms()
 
 }

@@ -71,21 +71,6 @@
     <string name="hours">Hours</string>
     <string name="time_unit_title">What time unit would you like to use?</string>
 
-    <!--Announcement Screen-->
-    <string name="coming_soon">Proximamente</string>
-    <string name="announcement_title">Actualizacion - Version 1.2.0</string>
-    <string name="announcement_content">Antes que nada, me gustaría agradecerles a todas las personas que me enviaron un reporte o sugerencia, mejoremos la app juntos!</string>
-    <string name="announcement_5">*Se agregara una opcion para habilitar la muestra de un ejercicio para mejorar la postura y relajar los musculos al hacerle click a la notificacion.</string>
-    <string name="announcement_4">*Habilidad de tener varios perfiles configurados para hacer cambios en la configuracion rapidamente.</string>
-    <string name="announcement_3">*Ahora los intervalos de tiempo son completamente personalizables.</string>
-    <string name="announcement_2">*Se cambio el fondo para que no se sienta muy aburrido el inicio.</string>
-    <string name="announcement_1">*Nuevos campos de email y nombre en el envio de los reportes/ sugerencias así los puedo contactar y preguntar mas en detalle sobre sus ideas o problemas.</string>
-    <string name="announcement_6">*Cambio de color a la perilla de notificaciones para hacerlo mas claro cuando esta prendida/ apagada.</string>
-    <string name="announcement_7">*Se redujo el tamaño de la app significativamente ( 40% ~).</string>
-    <string name="new_announcement_title">Nueva actualizacion instalada!</string>
-    <string name="announcement_message">Gracias a todos por su ayuda a mejorar la app.\nClick para ver los últimos cambios hechos.</string>
-
-
     <string-array name="alarmDays">
         <item>Monday</item>
         <item>Tuesday</item>
@@ -139,8 +124,6 @@
     <string name="updated_version">Actualizado a v%1$s</string>
 
     <string name="whats_new">Qué hay de nuevo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="portal_label">Portal</string>
     <string name="rankings_label">Rankings</string>
 

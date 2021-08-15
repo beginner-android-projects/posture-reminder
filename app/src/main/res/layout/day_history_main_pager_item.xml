@@ -5,7 +5,7 @@
     <data>
         <variable
             name="dayHistory"
-            type="com.puntogris.posture.model.DayLog" />
+            type="com.puntogris.posture.model.DayHistory" />
         <variable
             name="position"
             type="Integer" />
@@ -73,6 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            dayMonth="@{dayHistory.date}"
             android:textColor="@color/grey"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
@@ -109,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="sans-serif-black"
-            android:text="@{String.valueOf(dayHistory.notificationsCounter)}"
+            android:text="@{String.valueOf(dayHistory.notifications)}"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="@+id/textView"
@@ -121,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="@{String.valueOf(dayHistory.exercisesCounter)}"
+            android:text="@{String.valueOf(dayHistory.exercises)}"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintStart_toEndOf="@+id/divider2"
@@ -133,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="@{`+` + String.valueOf(dayHistory.expCounter)}"
+            android:text="@{`+` + String.valueOf(dayHistory.expGained)}"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintStart_toEndOf="@+id/divider3"

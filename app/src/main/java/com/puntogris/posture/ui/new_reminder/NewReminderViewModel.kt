@@ -1,40 +1,28 @@
 package com.puntogris.posture.ui.new_reminder
 
 import androidx.lifecycle.*
-import com.puntogris.posture.data.Repository
+import com.puntogris.posture.data.local.ReminderDao
 import com.puntogris.posture.model.Reminder
-import com.puntogris.posture.model.Sound
+import com.puntogris.posture.model.ToneItem
 import com.puntogris.posture.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.realm.RealmList
 
 import javax.inject.Inject
 
 @HiltViewModel
 class NewReminderViewModel @Inject constructor(
-    private val repository: Repository
+    private val reminderDao: ReminderDao
 ) : ViewModel() {
 
     private val _reminderConfig = MutableLiveData(Reminder())
     val reminder: LiveData<Reminder> = _reminderConfig
 
-    fun saveReminder() = repository.insertReminder(_reminderConfig.value!!)
-
+    suspend fun saveReminderRoom() {
+        reminderDao.insert(_reminderConfig.value!!)
+    }
 
     fun updateReminder(reminder: Reminder) {
-        val copy = Reminder(
-            _id = reminder._id,
-            name = reminder.name,
-            _partition = reminder._partition,
-            timeInterval = reminder.timeInterval,
-            startTime = reminder.startTime,
-            endTime = reminder.endTime,
-            alarmDays = reminder.alarmDays,
-            color = reminder.color,
-            vibrationPattern = reminder.vibrationPattern,
-            sound = reminder.sound
-        )
-        _reminderConfig.value = copy
+        _reminderConfig.value = reminder
     }
 
     fun saveReminderName(text: String) {
@@ -54,9 +42,7 @@ class NewReminderViewModel @Inject constructor(
     }
 
     fun saveReminderDays(days: List<Int>) {
-        val realmList = RealmList<Int>()
-        realmList.addAll(days)
-        _reminderConfig.setField { alarmDays = realmList }
+        _reminderConfig.setField { alarmDays = days }
     }
 
     fun saveReminderColor(resource: Int) {
@@ -67,9 +53,12 @@ class NewReminderViewModel @Inject constructor(
         _reminderConfig.setField { vibrationPattern = position }
     }
 
-    fun saveReminderSoundPattern(sound: Sound){
-        _reminderConfig.setField {
-            this.sound = sound
+    fun saveReminderSoundPattern(toneItem: ToneItem?){
+        toneItem?.let {
+            _reminderConfig.setField {
+                soundUri = it.uri
+                soundName = it.title
+            }
         }
     }
 }

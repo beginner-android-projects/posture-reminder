@@ -21,14 +21,14 @@ import java.util.*
 
 @BindingAdapter("reminderSummaryStatus")
 fun TextView.setReminderSummaryStatus(reminder: Reminder?){
-  // if(reminder != null) text = if (reminder.isActive) context.getString(R.string.alarm_on) else context.getString(
-  //      R.string.alarm_off)
+    if(reminder != null) text = if (reminder.isActive) context.getString(R.string.alarm_on) else context.getString(
+        R.string.alarm_off)
 }
 
 @BindingAdapter("reminderStatus")
 fun TextView.setReminderStatus(reminder: Reminder?){
- //   if(reminder != null) text = if (reminder.isActive) context.getString(R.string.stop_alarm) else context.getString(
-    //    R.string.start_alarm)
+    if(reminder != null) text = if (reminder.isActive) context.getString(R.string.stop_alarm) else context.getString(
+        R.string.start_alarm)
 }
 
 @BindingAdapter("imageFromRes")
@@ -112,23 +112,4 @@ fun DonutChartView.setDonutChartProgress(exp: Int){
 @BindingAdapter("donutLevel")
 fun TextView.setDonutLevel(exp: Int){
     text = if (exp < 100 )"Lvl. 1" else "Lvl. ${(exp / 100)}"
-}
-
-@BindingAdapter("profileRankingNumber")
-fun TextView.setProfileRankingNumber(position: Int){
-    if (position in 0..2) gone()
-    else {
-        visible()
-        text = (position + 1).toString()
-    }
-}
-
-@BindingAdapter("profileRankingMedal")
-fun ImageView.setProfileRankingMedal(position: Int){
-    when (position) {
-        0 -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_gold_medal))
-        1 -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_silver_medal))
-        2 -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_bronze_medal))
-        else -> gone()
-    }
 }
