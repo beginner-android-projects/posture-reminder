@@ -28,7 +28,6 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +48,18 @@
             android:text="Ver ranking global"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="40dp" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutTitle" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Ejercicios"
+            style="@style/Theme.Posture.RegularTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

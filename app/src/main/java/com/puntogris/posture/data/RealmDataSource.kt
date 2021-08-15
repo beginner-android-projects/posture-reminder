@@ -5,6 +5,7 @@ import com.puntogris.posture.model.*
 import com.puntogris.posture.utils.userId
 import io.realm.Realm
 import io.realm.RealmResults
+import io.realm.Sort
 import io.realm.kotlin.toChangesetFlow
 import io.realm.kotlin.toFlow
 import io.realm.kotlin.where
@@ -33,7 +34,7 @@ class RealmDataSource @Inject constructor() {
         val result = MutableStateFlow<LoginResult>(LoginResult.InProgress)
         val appCredentials = Credentials.emailPassword(userName, password)
 
-        realmApp.loginAsync(appCredentials) {
+        realmApp.loginAsync(Credentials.anonymous()) {
             if (it.error != null) {
                 result.value = LoginResult.Error(it.error.localizedMessage)
             } else {
@@ -121,12 +122,14 @@ class RealmDataSource @Inject constructor() {
 
     fun getTopThreeRankings(): RealmResults<RankingProfile> {
         return sharedRealm.where<RankingProfile>()
+            .sort("experience", Sort.DESCENDING)
             .limit(3)
             .findAll()
     }
 
     fun getGlobalRankingsData(): RealmResults<RankingProfile> {
         return sharedRealm.where<RankingProfile>()
+            .sort("experience", Sort.DESCENDING)
             .limit(30)
             .findAll()
     }

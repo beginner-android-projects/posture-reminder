@@ -13,5 +13,6 @@ open class User(
     var experience: Int = 0,
     var currentReminderId: Int = 0,
     var creation: Date = Date(),
-    var email: String = ""
+    var email: String = "",
+    var country: String = ""
 ): RealmObject()
