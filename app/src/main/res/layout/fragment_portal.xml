@@ -43,7 +43,7 @@
             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
             android:fontFamily="sans-serif-medium"
             android:foreground="?selectableItemBackground"
-            android:onClick="@{()-> fragment.onSeeGlobalRankingClicked()}"
+            android:onClick="@{()-> fragment.navigateToGlobalRanking()}"
             android:padding="8dp"
             android:text="Ver ranking global"
             android:textSize="15sp"

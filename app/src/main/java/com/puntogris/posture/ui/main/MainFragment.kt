@@ -67,9 +67,6 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
        // binding.announcementCard.gone()
     }
 
-    fun onOpenAnnouncementClicked(){
-        findNavController().navigate(R.id.announcementFragment)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)

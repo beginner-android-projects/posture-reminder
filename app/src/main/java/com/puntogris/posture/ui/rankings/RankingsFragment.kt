@@ -16,10 +16,8 @@ class RankingsFragment : BaseFragment<FragmentRankingsBinding>(R.layout.fragment
     private val viewModel: RankingsViewModel by viewModels()
 
     override fun initializeViews() {
-        RankingsAdapter().let {
-            binding.recyclerView.adapter = it
-            it.updateData(viewModel.getRankingsData())
-        }
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
