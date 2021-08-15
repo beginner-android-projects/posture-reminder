@@ -1,4 +1,4 @@
-package com.puntogris.posture.ui.health
+package com.puntogris.posture.ui.portal
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -7,9 +7,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HealthViewModel @Inject constructor(
+class PortalViewModel @Inject constructor(
     private val repository: Repository
 ): ViewModel() {
 
-    fun getTopRankingsUsers() = repository.getTopThreeExpRankings().asLiveData()
+    fun getTopRankingsUsers() = repository.getTopThreeExpRankings()
+
 }

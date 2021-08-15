@@ -1,5 +1,6 @@
 package com.puntogris.posture.model
 
+import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import org.bson.types.ObjectId
 
@@ -10,4 +11,4 @@ open class RankingProfile(
     var name: String = "",
     var country: String = "",
     var experience: Int = 0
-)
+):RealmObject()

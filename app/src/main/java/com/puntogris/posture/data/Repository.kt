@@ -1,9 +1,6 @@
 package com.puntogris.posture.data
 
-import com.puntogris.posture.model.Reminder
-import com.puntogris.posture.model.Ticket
-import com.puntogris.posture.model.RepoResult
-import com.puntogris.posture.model.User
+import com.puntogris.posture.model.*
 import kotlinx.coroutines.flow.*
 import java.lang.Exception
 import javax.inject.Inject
@@ -56,5 +53,7 @@ class Repository @Inject constructor(
     override fun getLastTwoEntries() = realmDataSource.getLastTwoDaysHistory()
 
     override fun getTopThreeExpRankings() = realmDataSource.getTopThreeRankings()
+
+    override fun getGlobalRankings() = realmDataSource.getGlobalRankingsData()
 
 }

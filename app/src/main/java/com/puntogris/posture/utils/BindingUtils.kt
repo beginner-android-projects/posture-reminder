@@ -113,3 +113,22 @@ fun DonutChartView.setDonutChartProgress(exp: Int){
 fun TextView.setDonutLevel(exp: Int){
     text = if (exp < 100 )"Lvl. 1" else "Lvl. ${(exp / 100)}"
 }
+
+@BindingAdapter("profileRankingNumber")
+fun TextView.setProfileRankingNumber(position: Int){
+    if (position in 0..2) gone()
+    else {
+        visible()
+        text = (position + 1).toString()
+    }
+}
+
+@BindingAdapter("profileRankingMedal")
+fun ImageView.setProfileRankingMedal(position: Int){
+    when (position) {
+        0 -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_gold_medal))
+        1 -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_silver_medal))
+        2 -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_bronze_medal))
+        else -> gone()
+    }
+}

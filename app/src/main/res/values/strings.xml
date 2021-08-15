@@ -141,6 +141,7 @@
     <string name="whats_new">Qué hay de nuevo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="portal_label">Portal</string>
 
     <!--    <string name="whats_new">What\'s new</string>-->
 

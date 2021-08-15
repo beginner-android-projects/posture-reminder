@@ -89,12 +89,19 @@
         android:id="@+id/whatsNewDialog"
         android:name="com.puntogris.posture.ui.main.WhatsNewDialog" />
     <fragment
-        android:id="@+id/healthFragment"
-        android:name="com.puntogris.posture.ui.health.HealthFragment"/>
+        android:id="@+id/portalFragment"
+        android:name="com.puntogris.posture.ui.portal.PortalFragment">
+        <action
+            android:id="@+id/action_portalFragment_to_rankingsFragment"
+            app:destination="@id/rankingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.puntogris.posture.ui.login.LoginFragment"/>
     <fragment
         android:id="@+id/loginWithEmailFragment"
         android:name="com.puntogris.posture.ui.login.LoginWithEmailFragment" />
+    <fragment
+        android:id="@+id/rankingsFragment"
+        android:name="com.puntogris.posture.ui.rankings.RankingsFragment" />
 </navigation>

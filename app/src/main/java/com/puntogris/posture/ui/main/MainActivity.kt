@@ -55,7 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     R.id.accountFragment,
                     R.id.newReminderBottomSheet,
                     R.id.welcomeFragment,
-                    R.id.healthFragment,
+                    R.id.portalFragment,
                     R.id.loginFragment
                 )
             )
