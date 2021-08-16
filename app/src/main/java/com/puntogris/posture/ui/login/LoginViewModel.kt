@@ -10,4 +10,7 @@ class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository
 ):ViewModel() {
 
+    fun authUserWithFirebase(idToken: String) = loginRepository.firebaseAuthWithGoogle(idToken)
+
+    fun getGoogleSignInIntent() = loginRepository.createGoogleSignInIntent()
 }
