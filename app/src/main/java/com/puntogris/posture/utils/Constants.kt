@@ -10,7 +10,7 @@ object Constants {
     const val DAILY_ALARM_TRIGGERED = "DAILY_ALARM_TRIGGERED"
     const val REPEATING_ALARM_TRIGGERED = "REPEATING_ALARM_TRIGGERED"
     const val POSTURE_NOTIFICATION_ID = "postureNotification"
-    const val BUG_REPORT_COLLECTION_NAME = "bug_reports"
+    const val TICKET_COLLECTION_NAME = "tickets"
     const val SHAKE_ANIMATION_DURATION = 800L
 
     //Notification channel

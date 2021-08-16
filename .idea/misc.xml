@@ -48,6 +48,7 @@
         <entry key="app/src/main/res/layout/bottom_sheet_manage_reminders.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout/bottom_sheet_new_reminder.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout/bottom_sheet_settings.xml" value="0.34512820512820513" />
+        <entry key="app/src/main/res/layout/bottom_sheet_ticket.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout/dialog_edit_username.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout/dialog_name.xml" value="0.35052083333333334" />

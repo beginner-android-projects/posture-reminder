@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_settingsBottomSheet_to_dialogName"
             app:destination="@id/dialogName" />
+        <action
+            android:id="@+id/action_settingsBottomSheet_to_ticketBottomSheet"
+            app:destination="@id/ticketBottomSheet" />
     </dialog>
     <dialog
         android:id="@+id/dialogName"
@@ -112,4 +115,8 @@
     <fragment
         android:id="@+id/loginWithEmailFragment"
         android:name="com.puntogris.posture.ui.login.LoginWithEmailFragment" />
+    <dialog
+        android:id="@+id/ticketBottomSheet"
+        android:name="com.puntogris.posture.ui.ticket.TicketBottomSheet"
+        android:label="TicketBottomSheet" />
 </navigation>

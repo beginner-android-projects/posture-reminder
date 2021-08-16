@@ -85,6 +85,7 @@ class SettingsBottomSheet : BaseBottomSheetFragment<BottomSheetSettingsBinding>(
         findNavController().navigate(R.id.dialogTheme)
     }
     private fun onTicketClicked(){
+        findNavController().navigate(R.id.action_settingsBottomSheet_to_ticketBottomSheet)
 
     }
     private fun onVersionClicked(){

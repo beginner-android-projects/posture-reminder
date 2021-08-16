@@ -6,7 +6,7 @@ import com.puntogris.posture.data.local.DayHistoryDao
 import com.puntogris.posture.data.local.ReminderDao
 import com.puntogris.posture.data.remote.Repository
 import com.puntogris.posture.model.Reminder
-import com.puntogris.posture.model.Report
+import com.puntogris.posture.model.Ticket
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -54,5 +54,5 @@ class MainViewModel @Inject constructor(
 
     fun getLastTwoDaysHistory() = dayHistoryDao.getLastTwoEntries()
 
-    suspend fun sendReport(report:Report) = repository.sendReportToFirestore(report)
+    suspend fun sendReport(ticket:Ticket) = repository.sendReportToFirestore(ticket)
 }

@@ -28,13 +28,13 @@ class SettingsAdapter(private val clickListener: (SettingItem) -> Unit): Recycle
         return if (viewType == 0)
             SettingsDividerViewHolder.from(parent)
         else
-            SettingViewHolder.from(parent)
+            SettingItemViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = list[position]
         if (item.code == null) (holder as SettingsDividerViewHolder).bind(list[position])
-        else (holder as SettingViewHolder).bind(list[position], clickListener)
+        else (holder as SettingItemViewHolder).bind(list[position], clickListener)
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -5,33 +5,56 @@
 
     <data>
         <variable
-            name="fragment"
-            type="com.puntogris.posture.ui.ticket.TicketFragment" />
+            name="bottomSheet"
+            type="com.puntogris.posture.ui.ticket.TicketBottomSheet" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.ticket.TicketFragment">
+        tools:context=".ui.ticket.TicketBottomSheet">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/Theme.Posture.MediumTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="55dp"
+            android:text="@string/ticket_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:foreground="?actionBarItemBackground"
+            android:onClick="@{()-> bottomSheet.dismiss()}"
+            android:padding="8dp"
+            android:src="@drawable/ic_baseline_close_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/business"
+            android:id="@+id/ticket"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="60dp"
-            android:hint="@string/select_business_hint"
+            android:hint="Tipo de ticket"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/title">
 
             <AutoCompleteTextView
-                android:id="@+id/businessText"
+                android:id="@+id/ticketType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"/>
+                android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,10 +66,10 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:hint="@string/message_hint"
+            android:hint="Mensaje"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/business">
+            app:layout_constraintTop_toBottomOf="@+id/ticket">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/messageText"
@@ -60,30 +83,39 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/textView172"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:text="*I will be in touch shortly.\nYou can also reach me at :\npuntogrishelp@gmail.com"
             android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="@string/select_business_alert"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/sendbutton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/message" />
 
         <TextView
-            android:id="@+id/textView186"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:onClick="@{()-> fragment.onHideKeyboardClicked()}"
+            android:onClick="@{()-> bottomSheet.onHideKeyboardClicked()}"
             android:fontFamily="sans-serif-medium"
-            android:text="@string/action_close_keyboard"
+            android:text="Cerrar teclado"
             android:foreground="?selectableItemBackground"
-            android:textColor="@color/primaryColor"
+            android:textColor="?colorPrimary"
             app:layout_constraintEnd_toEndOf="@+id/message"
             app:layout_constraintTop_toBottomOf="@+id/message" />
+
+        <Button
+            android:id="@+id/sendbutton"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="8dp"
+            android:text="Enviar"
+            android:onClick="@{()-> bottomSheet.onSendTicketClicked()}"
+            style="@style/Theme.Posture.Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

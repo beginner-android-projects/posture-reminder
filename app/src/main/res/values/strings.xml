@@ -130,9 +130,17 @@
     <string name="battery_optimization_step_two_light"><![CDATA[<font color=\'#C0C0C4\'>2 - Selecciona </font><b><font color=\'#ffffff\'> no optimizar</font></b><font color=\'#C0C0C4\'> la bateria</font>]]></string>
     <string name="battery_optimization_step_one_dark"><![CDATA[<font color=\'#757575\'>1 - Busca </font><b><font color=\'#000000\'>recordatorio de postura</font></b><font color=\'#757575\'> en el listado</font>]]></string>
     <string name="battery_optimization_step_two_dark"><![CDATA[<font color=\'#757575\'>2 - Selecciona </font><b><font color=\'#000000\'> no optimizar</font></b><font color=\'#757575\'> la bateria</font>]]></string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ticket_label">Ticket</string>
+    <string name="snack_send_ticket_success">Ticket enviado correctamente.</string>
+    <string name="snack_send_ticket_error">Erro al enviar el ticket</string>
 
     <!--    <string name="whats_new">What\'s new</string>-->
+
+
+    <string-array name="ticket_types">
+        <item>Problem</item>
+        <item>Suggestion</item>
+    </string-array>
+
 
 </resources>
