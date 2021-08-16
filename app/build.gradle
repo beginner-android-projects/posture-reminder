@@ -146,4 +146,7 @@ dependencies {
 
     //Google sign in
     implementation "com.google.android.gms:play-services-auth:$googleSignIn"
+
+    implementation 'com.github.EhsanMashhadi:CountryPicker:0.4.0'
+
 }

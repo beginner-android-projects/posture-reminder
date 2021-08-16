@@ -35,6 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setupNavigation()
         checkAppCurrentVersion()
     }
+
     private fun checkAppCurrentVersion(){
         viewModel.appVersionStatus.observe(this){ isNewVersion ->
             if (isNewVersion) navController.navigate(R.id.whatsNewDialog)
@@ -70,6 +71,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun setupBottomNavigation(){
         binding.bottomNavigation.apply {
             setupWithNavController(navController)
+            //trick to disable reloading the same destination if we are there already
             setOnItemReselectedListener {}
         }
     }

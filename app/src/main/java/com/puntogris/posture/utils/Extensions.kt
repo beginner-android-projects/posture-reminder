@@ -3,15 +3,19 @@ package com.puntogris.posture.utils
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.PowerManager
 import android.view.Menu
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -22,6 +26,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.puntogris.posture.R
 import com.puntogris.posture.model.Reminder
@@ -113,12 +118,16 @@ fun String.capitalizeFirstChar() =
 
 fun LocalDate.getDayStringFormatted() = format(DateTimeFormatter.ofPattern("EEE ")).replace(".","").capitalizeFirstChar()
 
-fun Fragment.openInBrowser(url: String) {
+fun Fragment.launchWebBrowserIntent(uri: String, packageName: String? = null){
     try {
-        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-        startActivity(intent)
-    } catch (e: Throwable) {
-        //snack e.message
+        Intent(Intent.ACTION_VIEW).let {
+            it.data = Uri.parse(uri)
+            if (packageName != null) it.setPackage(packageName)
+            startActivity(it)
+        }
+
+    }catch (e:Exception){
+       //snack erro
     }
 }
 
@@ -136,4 +145,30 @@ fun BroadcastReceiver.goAsync(
             result.finish()
         }
     }
+}
+
+fun BottomSheetDialogFragment.showSnackBarInBottomSheet(
+    @StringRes message: Int,
+    duration: Int = Snackbar.LENGTH_LONG,
+    anchorView: View? = null,
+    actionText: Int = R.string.action_undo,
+    actionListener: View.OnClickListener? = null
+){
+    Snackbar.make(dialog?.window!!.decorView, message, duration).let {
+        if (anchorView != null) it.anchorView = anchorView
+        if (actionListener != null) it.setAction(actionText, actionListener)
+        it.show()
+    }
+}
+fun Context.hideKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun Activity.hideKeyboard() {
+    hideKeyboard(currentFocus ?: View(this))
+}
+
+fun Fragment.hideKeyboard() {
+    view?.let { requireActivity().hideKeyboard(it) }
 }

@@ -28,6 +28,7 @@ object Constants {
     const val APP_PREFERENCES_NAME = "app_preferences"
     const val LAST_VERSION_CODE = "last_version_code"
     const val APP_THEME = "pref_app_theme"
+    const val PANDA_ANIMATION = "pref_panda_animation"
 
 
 }

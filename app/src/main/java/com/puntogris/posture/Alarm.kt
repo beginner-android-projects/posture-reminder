@@ -30,14 +30,15 @@ class Alarm @Inject constructor(@ApplicationContext private val context: Context
             context,
             100,
             dailyAlarmIntent,
-            0
+            PendingIntent.FLAG_IMMUTABLE
     )
 
     private val pendingIntentRepeatingAlarm = PendingIntent.getBroadcast(
             context,
             200,
             repeatingAlarmIntent,
-            0
+            PendingIntent.FLAG_IMMUTABLE
+
     )
 
     fun startDailyAlarm(reminder: Reminder){

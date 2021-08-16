@@ -1,45 +1,105 @@
 package com.puntogris.posture.ui.settings
 
-import android.app.Dialog
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.puntogris.posture.R
 import com.puntogris.posture.databinding.BottomSheetSettingsBinding
+import com.puntogris.posture.model.SettingItem
+import com.puntogris.posture.model.SettingUi
 import com.puntogris.posture.ui.base.BaseBottomSheetFragment
 import com.puntogris.posture.utils.isIgnoringBatteryOptimizations
+import com.puntogris.posture.utils.launchWebBrowserIntent
+import com.puntogris.posture.utils.showSnackBarInBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SettingsBottomSheet : BaseBottomSheetFragment<BottomSheetSettingsBinding>(R.layout.bottom_sheet_settings, true) {
 
     private val viewModel: SettingsViewModel by viewModels()
+    private lateinit var settingsAdapter: SettingsAdapter
 
     override fun initializeViews() {
         binding.bottomSheet = this
-        binding.notificationSwitch.itemName.text = "Habilitar notificaciones"
-        binding.theme.itemName.text = "Tema"
-        binding.theme.itemDescription.text = "Claro"
-        binding.username.itemName.text = "Nombre"
-        binding.username.itemDescription.text = "Joaquin"
-        binding.username.layout.setOnClickListener {
-            val action = SettingsBottomSheetDirections.actionSettingsBottomSheetToDialogName("")
-            findNavController().navigate(action)
-        }
-        binding.theme.layout.setOnClickListener {
-            findNavController().navigate(R.id.dialogTheme)
-        }
+        setupRecyclerViewAdapter()
+    }
 
-        binding.batteryOptimization.apply {
-            itemName.text = "Optimiz. bateria"
-            itemDescription.text = if(isIgnoringBatteryOptimizations()) "Correcto" else "Necesita accion"
-            layout.setOnClickListener {
-                findNavController().navigate(R.id.batteryOptimizationFragment)
+    private fun setupRecyclerViewAdapter(){
+        settingsAdapter = SettingsAdapter{ onSettingClicked(it) }
+        binding.recyclerView.adapter = settingsAdapter
+        setBatteryOptimizationSummary()
+        setThemeName()
+       // setUserName()
+    }
+
+    private fun setUserName(){
+        lifecycleScope.launch {
+            viewModel.getUserFlow().collect {
+                settingsAdapter.updateUserName(it.name)
             }
         }
+    }
 
+    private fun setBatteryOptimizationSummary(){
+        settingsAdapter.updateBatteryOptimization(isIgnoringBatteryOptimizations())
+    }
+
+    private fun setThemeName(){
+        val themeNames = resources.getStringArray(R.array.theme_names)
+        lifecycleScope.launch {
+            viewModel.getThemeNamePosition().collect {
+                settingsAdapter.updateThemeName(themeNames[it])
+            }
+        }
+    }
+
+    private fun onSettingClicked(settingItem: SettingItem){
+        when(settingItem.code){
+            SettingUi.BatteryOpt -> onBatteryClicked()
+            SettingUi.Github -> onGithubClicked()
+            SettingUi.Help -> onHelpClicked()
+            SettingUi.Name -> onNameClicked()
+            SettingUi.RateApp -> onRateAppClicked()
+            SettingUi.Theme -> onThemeClicked()
+            SettingUi.Ticket -> onTicketClicked()
+            SettingUi.Version -> onVersionClicked()
+            SettingUi.Website -> onWebsiteClicked()
+        }
+    }
+
+    private fun onBatteryClicked(){
+        findNavController().navigate(R.id.batteryOptimizationFragment)
+    }
+
+    private fun onNameClicked(){
+        findNavController().navigate(R.id.dialogName)
+    }
+    private fun onRateAppClicked(){
+        launchWebBrowserIntent(
+            "https://play.google.com/store/apps/details?id=com.puntogris.posture",
+            "com.puntogris.posture")
+    }
+    private fun onThemeClicked(){
+        findNavController().navigate(R.id.dialogTheme)
+    }
+    private fun onTicketClicked(){
 
     }
+    private fun onVersionClicked(){
+        viewModel.setPandaAnimationPref(true)
+        showSnackBarInBottomSheet(R.string.panda_unlocked_message)
+    }
+    private fun onWebsiteClicked(){
+        launchWebBrowserIntent("https://www.postureapp.puntogris.com")
+    }
+    private fun onGithubClicked(){
+        launchWebBrowserIntent("https://www.github.com/puntogris")
+    }
+    private fun onHelpClicked(){
+        launchWebBrowserIntent("https://www.postureapp.puntogris.com/help")
+    }
+
 }
+

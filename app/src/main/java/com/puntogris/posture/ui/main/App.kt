@@ -1,4 +1,4 @@
-package com.puntogris.posture.di
+package com.puntogris.posture.ui.main
 
 import android.app.Application
 import android.app.NotificationChannel
@@ -8,7 +8,6 @@ import android.os.Build
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.puntogris.posture.utils.Constants
 import dagger.hilt.android.HiltAndroidApp
-
 
 @HiltAndroidApp
 class App :Application(){

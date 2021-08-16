@@ -30,7 +30,5 @@ class MainViewModel @Inject constructor(
     val appVersionStatus: LiveData<Boolean>
         get() = _appVersionStatus
 
-
     fun isUserLoggedIn() = mainRepository.isUserLoggedIn()
-
 }

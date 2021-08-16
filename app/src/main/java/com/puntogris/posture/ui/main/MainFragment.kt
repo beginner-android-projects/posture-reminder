@@ -5,6 +5,8 @@ import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.borutsky.neumorphism.NeumorphicFrameLayout
+import com.ehsanmashhadi.library.presenter.CountryPickerContractor
+import com.ehsanmashhadi.library.view.CountryPicker
 import com.puntogris.posture.R
 import com.puntogris.posture.data.local.UserDao
 import com.puntogris.posture.databinding.FragmentMainBinding
@@ -27,7 +29,8 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             it.fragment = this
             it.pandaAnimation.setPadding(0, 0, -100, -110)
         }
-        setupPager()
+       // setupPager()
+
 
        // binding.pandaAnimation.setMinAndMaxFrame(44, 74)
 
@@ -36,13 +39,13 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         //val asd = binding.pandaAnimation.frame
       //  println(asd)
 
-        var c = 0
-        binding.circleButton.setOnClickListener {
-            c = if (c == 0) 1 else 0
-            binding.enableTextView.text = if (c == 0) "Activar" else "Desactivar"
-
-          //  binding.circleButton.setShapeType(c)
-        }
+//        var c = 0
+//        binding.circleButton.setOnClickListener {
+//            c = if (c == 0) 1 else 0
+//            binding.enableTextView.text = if (c == 0) "Activar" else "Desactivar"
+//
+//          //  binding.circleButton.setShapeType(c)
+//        }
 
 
     }

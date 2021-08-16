@@ -33,6 +33,7 @@ class LoginFragment :BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
     private fun registerActivityResultLauncher(){
         loginActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == Activity.RESULT_OK) handleLoginActivityResult(it.data)
+            println(it.resultCode)
         }
     }
 

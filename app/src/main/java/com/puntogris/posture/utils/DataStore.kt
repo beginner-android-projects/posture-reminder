@@ -8,6 +8,7 @@ import com.puntogris.posture.BuildConfig
 import com.puntogris.posture.utils.Constants.APP_PREFERENCES_NAME
 import com.puntogris.posture.utils.Constants.APP_THEME
 import com.puntogris.posture.utils.Constants.LAST_VERSION_CODE
+import com.puntogris.posture.utils.Constants.PANDA_ANIMATION
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -27,8 +28,19 @@ class DataStore @Inject constructor(@ApplicationContext private val context: Con
 
     suspend fun appTheme() = context.dataStore.data.first()[intPreferencesKey(APP_THEME)] ?: 2
 
+    fun appThemeFlow() = context.dataStore.data.map {
+        val value = it[intPreferencesKey(APP_THEME)] ?: 2
+        if (value == -1) 2 else value - 1
+    }
+
     suspend fun setAppTheme(value: Int) = context.dataStore.edit {
         it[intPreferencesKey(APP_THEME)] = value
+    }
+
+    suspend fun setPandaAnimation(value:Boolean){
+        context.dataStore.edit {
+            it[booleanPreferencesKey(PANDA_ANIMATION)] = value
+        }
     }
 
     fun getNotificationsPref(): Boolean{
