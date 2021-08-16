@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.puntogris.posture.BuildConfig
-import com.puntogris.posture.model.AuthState
+import com.puntogris.posture.data.repo.main.MainRepository
 import com.puntogris.posture.utils.DataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val  dataStore: DataStore
+    private val  dataStore: DataStore,
+    private val mainRepository: MainRepository
 ):ViewModel() {
 
     init {
@@ -30,9 +31,6 @@ class MainViewModel @Inject constructor(
         get() = _appVersionStatus
 
 
-    fun isUserLoggedIn(): AuthState {
-//        return if (repository.restoreLoggedUser() == null) AuthState.AuthRequired
-//        else AuthState.AuthComplete
-        return AuthState.AuthRequired
-    }
+    fun isUserLoggedIn() = mainRepository.isUserLoggedIn()
+
 }

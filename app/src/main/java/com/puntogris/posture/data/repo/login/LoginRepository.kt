@@ -1,4 +1,4 @@
-package com.puntogris.posture.data.repo
+package com.puntogris.posture.data.repo.login
 
 import android.content.Context
 import android.content.Intent

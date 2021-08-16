@@ -18,10 +18,6 @@ sealed class ReminderUi{
     class Color(var color: Int): ReminderUi()
 }
 
-sealed class AuthState {
-    object AuthRequired : AuthState()
-    object AuthComplete : AuthState()
-}
 sealed class LoginResult {
     object InProgress: LoginResult()
     object Success: LoginResult()

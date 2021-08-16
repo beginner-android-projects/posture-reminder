@@ -4,17 +4,11 @@ import androidx.navigation.fragment.findNavController
 import com.puntogris.posture.databinding.FragmentBatteryOptimizationBinding
 import com.puntogris.posture.ui.base.BaseFragment
 import android.content.Intent
-import android.os.PowerManager
 import android.provider.Settings
 import com.puntogris.posture.utils.gone
-import android.text.Spannable
-import android.text.style.TypefaceSpan
-import android.text.SpannableString
-import android.graphics.Typeface
-import android.text.Html
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.HtmlCompat
 import com.puntogris.posture.R
+import com.puntogris.posture.utils.isDarkThemeOn
 import com.puntogris.posture.utils.isIgnoringBatteryOptimizations
 
 class BatteryOptimizationFragment : BaseFragment<FragmentBatteryOptimizationBinding>(R.layout.fragment_battery_optimization) {
@@ -22,22 +16,24 @@ class BatteryOptimizationFragment : BaseFragment<FragmentBatteryOptimizationBind
     override fun initializeViews() {
         binding.fragment = this
         checkPowerStatus()
+        setBatteryOptimizationsStepsUi()
+    }
 
+    private fun setBatteryOptimizationsStepsUi(){
         val stepOne =
-            "<font color='#757575'>1 - Busca </font> " +
-            "<b><font color='#000000'>recordatorio de postura</font></b>" +
-            "<font color='#757575'> en el listado</font>"
+            if (isDarkThemeOn()) R.string.battery_optimization_step_one_light
+            else R.string.battery_optimization_step_one_dark
 
         val stepTwo =
-            "<font color='#757575'>2 - Selecciona </font> " +
-            "<b><font color='#000000'> no optimizar</font></b>" +
-            "<font color='#757575'> la bateria</font>"
+            if (isDarkThemeOn()) R.string.battery_optimization_step_two_light
+            else R.string.battery_optimization_step_two_dark
 
-
-        binding.stepOne.text = HtmlCompat.fromHtml(stepOne, HtmlCompat.FROM_HTML_MODE_LEGACY)
-        binding.stepTwo.text = HtmlCompat.fromHtml(stepTwo, HtmlCompat.FROM_HTML_MODE_LEGACY)
-
+        binding.stepOne.text = htmlToString(stepOne)
+        binding.stepTwo.text = htmlToString(stepTwo)
     }
+
+    private fun htmlToString(htmlRes: Int) =
+        HtmlCompat.fromHtml(getString(htmlRes), HtmlCompat.FROM_HTML_MODE_LEGACY)
 
     private fun checkPowerStatus(){
         if (isIgnoringBatteryOptimizations()){

@@ -14,7 +14,6 @@ import com.puntogris.posture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.activity.viewModels
-import com.puntogris.posture.model.AuthState
 import kotlinx.coroutines.*
 
 @AndroidEntryPoint
@@ -34,7 +33,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun initializeViews() {
         setupNavigation()
-
+        checkAppCurrentVersion()
+    }
+    private fun checkAppCurrentVersion(){
         viewModel.appVersionStatus.observe(this){ isNewVersion ->
             if (isNewVersion) navController.navigate(R.id.whatsNewDialog)
         }
@@ -42,34 +43,48 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun setupNavigation() {
         navController = getNavController()
+        appBarConfiguration = getAppBarConfiguration()
+        navController.addOnDestinationChangedListener(this@MainActivity)
+
+        //call after navController is set
+        setupInitialDestination()
+        setupTopToolbar()
+        setupBottomNavigation()
+    }
+
+    private fun setupInitialDestination(){
         navController.graph = navController.navInflater.inflate(R.navigation.navigation)
             .apply {
-                startDestination = when (viewModel.isUserLoggedIn()) {
-                    AuthState.AuthComplete -> R.id.mainFragment
-                    AuthState.AuthRequired -> R.id.loginFragment
-                }
+                startDestination =
+                    if (viewModel.isUserLoggedIn()) R.id.mainFragment
+                    else R.id.loginFragment
             }
-        appBarConfiguration =
-            AppBarConfiguration(
-                setOf(
-                    R.id.mainFragment,
-                    R.id.accountFragment,
-                    R.id.newReminderBottomSheet,
-                    R.id.welcomeFragment,
-                    R.id.healthFragment,
-                    R.id.loginFragment
-                )
-            )
+    }
+
+    private fun setupTopToolbar(){
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         setupActionBarWithNavController(navController, appBarConfiguration)
+    }
 
+    private fun setupBottomNavigation(){
         binding.bottomNavigation.apply {
             setupWithNavController(navController)
             setOnItemReselectedListener {}
         }
+    }
 
-        navController.addOnDestinationChangedListener(this@MainActivity)
+    private fun getAppBarConfiguration(): AppBarConfiguration{
+        return AppBarConfiguration(
+            setOf(
+                R.id.mainFragment,
+                R.id.accountFragment,
+                R.id.newReminderBottomSheet,
+                R.id.welcomeFragment,
+                R.id.healthFragment,
+                R.id.loginFragment
+            )
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
