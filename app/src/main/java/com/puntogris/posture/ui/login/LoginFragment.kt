@@ -38,8 +38,8 @@ class LoginFragment :BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
     }
 
     private fun handleLoginActivityResult(intent: Intent?){
-        val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
         try {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
             val account = task.getResult(ApiException::class.java)!!
             authUserIntoFirebase(account.idToken!!)
         } catch (e: ApiException) {
@@ -50,17 +50,23 @@ class LoginFragment :BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
     private fun authUserIntoFirebase(idToken: String){
         lifecycleScope.launch {
             viewModel.authUserWithFirebase(idToken).collect {
-                when(it){
-                    is LoginResult.Error -> {
-                        binding.progressBar.gone()
-                    }
-                    LoginResult.InProgress -> {
-                        binding.progressBar.visible()
-                    }
-                    LoginResult.Success -> {
-                        findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
-                    }
-                }
+                handleAuthUserIntoFirebaseResult(it)
+            }
+        }
+    }
+
+    private fun handleAuthUserIntoFirebaseResult(result: LoginResult){
+        when (result) {
+            is LoginResult.Error -> {
+                binding.progressBar.gone()
+            }
+            LoginResult.InProgress -> {
+                binding.progressBar.visible()
+            }
+            is LoginResult.Success -> {
+                val action =
+                    LoginFragmentDirections.actionLoginFragmentToSynAccountFragment(result.userPrivateData)
+                findNavController().navigate(action)
             }
         }
     }
@@ -69,9 +75,4 @@ class LoginFragment :BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
         val intent = viewModel.getGoogleSignInIntent()
         loginActivityResultLauncher.launch(intent)
     }
-
-    fun navigateToLoginWithEmail() {
-
-    }
-
 }

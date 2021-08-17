@@ -66,6 +66,7 @@ class SettingsBottomSheet : BaseBottomSheetFragment<BottomSheetSettingsBinding>(
             SettingUi.Ticket -> onTicketClicked()
             SettingUi.Version -> onVersionClicked()
             SettingUi.Website -> onWebsiteClicked()
+            SettingUi.LogOut -> onLogOutClicked()
         }
     }
 
@@ -100,6 +101,9 @@ class SettingsBottomSheet : BaseBottomSheetFragment<BottomSheetSettingsBinding>(
     }
     private fun onHelpClicked(){
         launchWebBrowserIntent("https://www.postureapp.puntogris.com/help")
+    }
+    private fun onLogOutClicked(){
+        viewModel.logOut()
     }
 }
 

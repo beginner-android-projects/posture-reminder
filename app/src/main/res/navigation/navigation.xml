@@ -28,8 +28,8 @@
         android:id="@+id/welcomeFragment"
         android:name="com.puntogris.posture.ui.welcome.WelcomeFragment">
         <action
-            android:id="@+id/action_welcomeFragment_to_newUserFragment"
-            app:destination="@id/newUserFragment" />
+            android:id="@+id/action_welcomeFragment_to_batteryOptimizationFragment"
+            app:destination="@id/batteryOptimizationFragment" />
     </fragment>
     <dialog
         android:id="@+id/settingsBottomSheet"
@@ -59,13 +59,6 @@
             android:id="@+id/action_manageRemindersBottomSheet_to_newReminderBottomSheet"
             app:destination="@id/newReminderBottomSheet" />
     </dialog>
-    <fragment
-        android:id="@+id/newUserFragment"
-        android:name="com.puntogris.posture.ui.welcome.NewUserFragment">
-        <action
-            android:id="@+id/action_newUserFragment_to_batteryOptimizationFragment"
-            app:destination="@id/batteryOptimizationFragment" />
-    </fragment>
     <fragment
         android:id="@+id/batteryOptimizationFragment"
         android:name="com.puntogris.posture.ui.welcome.BatteryOptimizationFragment">
@@ -103,23 +96,24 @@
         android:id="@+id/loginFragment"
         android:name="com.puntogris.posture.ui.login.LoginFragment" >
         <action
-            android:id="@+id/action_loginFragment_to_loginWithEmailFragment"
-            app:destination="@id/loginWithEmailFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
+            android:id="@+id/action_loginFragment_to_synAccountFragment"
+            app:destination="@id/synAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/rankingsFragment"
         android:name="com.puntogris.posture.ui.rankings.RankingsFragment"/>
-    <fragment
-        android:id="@+id/loginWithEmailFragment"
-        android:name="com.puntogris.posture.ui.login.LoginWithEmailFragment" />
     <dialog
         android:id="@+id/ticketBottomSheet"
         android:name="com.puntogris.posture.ui.ticket.TicketBottomSheet"
         android:label="TicketBottomSheet" />
     <fragment
         android:id="@+id/synAccountFragment"
-        android:name="com.puntogris.posture.ui.sync.SynAccountFragment" />
+        android:name="com.puntogris.posture.ui.sync.SynAccountFragment" >
+        <argument
+            android:name="userPrivateData"
+            app:argType="com.puntogris.posture.model.UserPrivateData" />
+        <action
+            android:id="@+id/action_synAccountFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
 </navigation>

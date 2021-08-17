@@ -6,6 +6,7 @@ enum class SettingUi{
     Name,
     Theme,
     BatteryOpt,
+    LogOut,
     Help,
     Ticket,
     Website,

@@ -18,10 +18,10 @@ interface ReminderDao {
     @Delete
     suspend fun delete(reminder: Reminder)
 
-    @Query("SELECT * FROM reminder INNER JOIN user ON currentReminderId = reminderId")
+    @Query("SELECT * FROM reminder INNER JOIN UserPrivateData ON currentReminderId = reminderId")
     fun getReminderConfigLiveData(): LiveData<Reminder>
 
-    @Query("SELECT * FROM reminder INNER JOIN user ON currentReminderId = reminderId")
+    @Query("SELECT * FROM reminder INNER JOIN UserPrivateData ON currentReminderId = reminderId")
     fun getActiveReminder(): Reminder
 
 //    @Query("UPDATE reminder SET startTime = :startTime WHERE  = 1")

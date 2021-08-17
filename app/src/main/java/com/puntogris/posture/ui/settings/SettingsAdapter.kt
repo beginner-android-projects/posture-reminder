@@ -13,6 +13,7 @@ class SettingsAdapter(private val clickListener: (SettingItem) -> Unit): Recycle
         SettingItem(SettingUi.Name, "Nombre", "Terricola"),
         SettingItem(SettingUi.Theme,"Tema",""),
         SettingItem(SettingUi.BatteryOpt,"Optimiz. bateria",""),
+        SettingItem(SettingUi.LogOut,"Cerrar",""),
         SettingItem(title = "Ayuda"),
         SettingItem(SettingUi.Help,"Preguntas","Lee las F.A.Q."),
         SettingItem(SettingUi.Ticket,"Ticket /Feedback","Crea un ticket"),

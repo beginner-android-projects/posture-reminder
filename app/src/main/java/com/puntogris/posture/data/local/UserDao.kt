@@ -2,25 +2,30 @@ package com.puntogris.posture.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.puntogris.posture.model.User
+import com.puntogris.posture.model.UserPrivateData
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
 
-    @Query("SELECT * FROM user WHERE userId = 1")
-    suspend fun getUser(): User
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(userPrivateData: UserPrivateData)
 
-    @Query("SELECT * FROM user WHERE userId = 1")
-    fun getUserLiveData(): LiveData<User>
+    @Query("SELECT * FROM UserPrivateData WHERE userId = 1")
+    suspend fun getUser(): UserPrivateData
 
-    @Query("SELECT * FROM user WHERE userId = 1")
-    fun getUserFlow(): Flow<User>
+    @Query("SELECT * FROM UserPrivateData WHERE userId = 1")
+    fun getUserLiveData(): LiveData<UserPrivateData>
 
-    @Query("UPDATE user SET currentReminderId = :reminderId WHERE userId = 1")
+    @Query("SELECT * FROM UserPrivateData WHERE userId = 1")
+    fun getUserFlow(): Flow<UserPrivateData>
+
+    @Query("UPDATE UserPrivateData SET currentReminderId = :reminderId WHERE userId = 1")
     suspend fun updateCurrentUserReminder(reminderId: Int)
 
-    @Query("UPDATE user SET name = :name WHERE userId = 1")
+    @Query("UPDATE UserPrivateData SET name = :name WHERE userId = 1")
     suspend fun updateUsername(name: String)
 }

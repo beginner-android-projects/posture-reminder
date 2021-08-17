@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.RawRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -26,6 +27,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.puntogris.posture.R
@@ -171,4 +173,10 @@ fun Activity.hideKeyboard() {
 
 fun Fragment.hideKeyboard() {
     view?.let { requireActivity().hideKeyboard(it) }
+}
+
+fun LottieAnimationView.playAnimationOnce(@RawRes animation: Int){
+    setAnimation(animation)
+    repeatCount = 0
+    playAnimation()
 }
