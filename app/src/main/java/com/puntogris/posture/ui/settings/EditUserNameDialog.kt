@@ -2,10 +2,6 @@ package com.puntogris.posture.ui.settings
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -15,7 +11,7 @@ import com.puntogris.posture.R
 import com.puntogris.posture.databinding.DialogEditUsernameBinding
 import kotlinx.coroutines.launch
 
-class DialogEditUsername: DialogFragment(){
+class EditUserNameDialog: DialogFragment(){
 
     private lateinit var binding: DialogEditUsernameBinding
     private val viewModel: SettingsViewModel by viewModels()
@@ -25,10 +21,12 @@ class DialogEditUsername: DialogFragment(){
         binding.dialog = this
         return MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialog_rounded)
             .setView(binding.root)
+            .setPositiveButton(R.string.action_done) { _, _ -> onSaveName() }
+            .setNegativeButton(R.string.action_cancel) { _, _ -> dismiss() }
             .create()
     }
 
-    fun onSaveName(){
+    private fun onSaveName(){
         val text = binding.editTextTextPersonName.text.toString()
         lifecycleScope.launch {
             viewModel.updateUserName(text)

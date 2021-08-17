@@ -11,8 +11,8 @@ import kotlinx.parcelize.Parcelize
 @Entity
 data class Reminder(
 
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey(autoGenerate = false)
+    val reminderId: String = "",
 
     @ColumnInfo
     var name: String = "",
@@ -33,7 +33,7 @@ data class Reminder(
     var alarmDays: List<Int> = listOf(),
 
     @ColumnInfo
-    @ColorRes var color: Int = R.color.grey,
+    var color: Int = R.color.grey,
 
     @ColumnInfo
     var vibrationPattern: Int = 0,

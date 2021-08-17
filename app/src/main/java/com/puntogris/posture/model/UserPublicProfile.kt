@@ -1,8 +1,8 @@
 package com.puntogris.posture.model
 
-data class RankingProfile(
+data class UserPublicProfile(
     var name: String = "",
     var country: String = "",
     var experience: Int = 0,
-    var uid: String = ""
+    var userId: String = ""
 )

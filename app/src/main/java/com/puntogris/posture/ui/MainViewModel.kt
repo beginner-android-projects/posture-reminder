@@ -4,9 +4,7 @@ import androidx.lifecycle.*
 import com.puntogris.posture.Alarm
 import com.puntogris.posture.data.local.DayHistoryDao
 import com.puntogris.posture.data.local.ReminderDao
-import com.puntogris.posture.data.remote.Repository
 import com.puntogris.posture.model.Reminder
-import com.puntogris.posture.model.Ticket
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,7 +12,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
         private val reminderDao: ReminderDao,
-        private val repository: Repository,
         private val alarm: Alarm,
         private val dayHistoryDao: DayHistoryDao
     ): ViewModel() {
@@ -54,5 +51,4 @@ class MainViewModel @Inject constructor(
 
     fun getLastTwoDaysHistory() = dayHistoryDao.getLastTwoEntries()
 
-    suspend fun sendReport(ticket:Ticket) = repository.sendReportToFirestore(ticket)
 }

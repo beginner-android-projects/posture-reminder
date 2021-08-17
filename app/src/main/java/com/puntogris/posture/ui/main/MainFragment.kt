@@ -1,5 +1,7 @@
 package com.puntogris.posture.ui.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.activityViewModels
@@ -16,6 +18,10 @@ import com.puntogris.posture.utils.*
 import com.puntogris.posture.utils.Utils.minutesFromMidnightToHourlyTime
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import android.content.ContentResolver
+
+
+
 
 @AndroidEntryPoint
 class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
@@ -31,7 +37,6 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         }
        // setupPager()
 
-
        // binding.pandaAnimation.setMinAndMaxFrame(44, 74)
 
        // binding.pandaAnimation.setMaxFrame(31,61)
@@ -46,8 +51,6 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 //
 //          //  binding.circleButton.setShapeType(c)
 //        }
-
-
     }
 
     private fun setupPager(){

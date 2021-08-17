@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.puntogris.posture.databinding.RankingProfileVhBinding
-import com.puntogris.posture.model.RankingProfile
-import java.text.FieldPosition
+import com.puntogris.posture.model.UserPublicProfile
 
 class RankingsViewHolder(private val binding: RankingProfileVhBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(rankingProfile: RankingProfile, position: Int){
+    fun bind(rankingProfile: UserPublicProfile, position: Int){
         binding.rankingProfile = rankingProfile
         binding.position = position
         binding.executePendingBindings()

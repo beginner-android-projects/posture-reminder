@@ -74,7 +74,7 @@ class SettingsBottomSheet : BaseBottomSheetFragment<BottomSheetSettingsBinding>(
     }
 
     private fun onNameClicked(){
-        findNavController().navigate(R.id.dialogName)
+        findNavController().navigate(R.id.editUserNameDialog)
     }
     private fun onRateAppClicked(){
         launchWebBrowserIntent(
@@ -82,7 +82,7 @@ class SettingsBottomSheet : BaseBottomSheetFragment<BottomSheetSettingsBinding>(
             "com.puntogris.posture")
     }
     private fun onThemeClicked(){
-        findNavController().navigate(R.id.dialogTheme)
+        findNavController().navigate(R.id.selectThemeDialog)
     }
     private fun onTicketClicked(){
         findNavController().navigate(R.id.action_settingsBottomSheet_to_ticketBottomSheet)
@@ -101,6 +101,5 @@ class SettingsBottomSheet : BaseBottomSheetFragment<BottomSheetSettingsBinding>(
     private fun onHelpClicked(){
         launchWebBrowserIntent("https://www.postureapp.puntogris.com/help")
     }
-
 }
 

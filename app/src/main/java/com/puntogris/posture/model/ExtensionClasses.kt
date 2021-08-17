@@ -20,6 +20,6 @@ sealed class ReminderUi{
 
 sealed class LoginResult {
     object InProgress: LoginResult()
-    object Success: LoginResult()
+    class Success(val userPrivateData: UserPrivateData): LoginResult()
     class Error(val errorMsg: String?): LoginResult()
 }

@@ -14,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DialogTheme: DialogFragment(){
+class SelectThemeDialog: DialogFragment(){
 
     @Inject
     lateinit var dataStore: DataStore

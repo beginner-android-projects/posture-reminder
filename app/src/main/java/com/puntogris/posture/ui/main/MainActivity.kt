@@ -14,6 +14,7 @@ import com.puntogris.posture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.activity.viewModels
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 
 @AndroidEntryPoint
@@ -46,7 +47,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navController = getNavController()
         appBarConfiguration = getAppBarConfiguration()
         navController.addOnDestinationChangedListener(this@MainActivity)
-
         //call after navController is set
         setupInitialDestination()
         setupTopToolbar()
@@ -83,7 +83,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.accountFragment,
                 R.id.newReminderBottomSheet,
                 R.id.welcomeFragment,
-                R.id.healthFragment,
+                R.id.portalFragment,
                 R.id.loginFragment
             )
         )

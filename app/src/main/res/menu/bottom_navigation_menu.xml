@@ -7,7 +7,7 @@
         android:title="@string/home_label" />
 
     <item
-        android:id="@+id/healthFragment"
+        android:id="@+id/portalFragment"
         android:icon="@drawable/health_selector_icon"
         android:title="@string/portal_label" />
 

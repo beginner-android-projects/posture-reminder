@@ -37,21 +37,21 @@
         android:label="" >
         <action
             android:id="@+id/action_settingsBottomSheet_to_dialogName"
-            app:destination="@id/dialogName" />
+            app:destination="@id/editUserNameDialog" />
         <action
             android:id="@+id/action_settingsBottomSheet_to_ticketBottomSheet"
             app:destination="@id/ticketBottomSheet" />
     </dialog>
     <dialog
-        android:id="@+id/dialogName"
-        android:name="com.puntogris.posture.ui.settings.DialogEditUsername" >
+        android:id="@+id/editUserNameDialog"
+        android:name="com.puntogris.posture.ui.settings.EditUserNameDialog" >
         <argument
             android:name="username"
             app:argType="string" />
     </dialog>
     <dialog
-        android:id="@+id/dialogTheme"
-        android:name="com.puntogris.posture.ui.settings.DialogTheme"/>
+        android:id="@+id/selectThemeDialog"
+        android:name="com.puntogris.posture.ui.settings.SelectThemeDialog"/>
     <dialog
         android:id="@+id/manageRemindersBottomSheet"
         android:name="com.puntogris.posture.ui.account.ManageRemindersBottomSheet" >
@@ -119,4 +119,7 @@
         android:id="@+id/ticketBottomSheet"
         android:name="com.puntogris.posture.ui.ticket.TicketBottomSheet"
         android:label="TicketBottomSheet" />
+    <fragment
+        android:id="@+id/synAccountFragment"
+        android:name="com.puntogris.posture.ui.sync.SynAccountFragment" />
 </navigation>

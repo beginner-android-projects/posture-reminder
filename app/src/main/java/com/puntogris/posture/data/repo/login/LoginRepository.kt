@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.puntogris.posture.BuildConfig
+import com.puntogris.posture.model.UserPrivateData
 import com.puntogris.posture.model.LoginResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,8 +36,14 @@ class LoginRepository @Inject constructor(
         auth.signInWithCredential(credential)
             .addOnSuccessListener {
                 val user = auth.currentUser
-
-                result.value = LoginResult.Success }
+                val firestoreUser = UserPrivateData(
+                    name = user?.displayName.toString(),
+                    userId = user?.uid.toString(),
+                    email = user?.email.toString(),
+                    photoUrl = user?.photoUrl.toString()
+                )
+                result.value = LoginResult.Success(firestoreUser)
+            }
             .addOnFailureListener { result.value = LoginResult.Error(it.localizedMessage) }
 
         return result

@@ -8,16 +8,13 @@ import androidx.room.PrimaryKey
 class User(
 
     @PrimaryKey(autoGenerate = false)
-    val userId: Int = 1,
+    val userId: String = "",
 
     @ColumnInfo
     val name: String,
 
     @ColumnInfo
-    val level: Int,
-
-    @ColumnInfo
-    val experience: Int,
+    val experienceCounter: Int,
 
     @ColumnInfo
     val currentReminderId: Int

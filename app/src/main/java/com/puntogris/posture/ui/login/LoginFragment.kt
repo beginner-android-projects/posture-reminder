@@ -33,7 +33,7 @@ class LoginFragment :BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
     private fun registerActivityResultLauncher(){
         loginActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == Activity.RESULT_OK) handleLoginActivityResult(it.data)
-            println(it.resultCode)
+            // else mostrar snack diciendo que no se encontro uan cuenta o que hay problemas de conexcion
         }
     }
 
