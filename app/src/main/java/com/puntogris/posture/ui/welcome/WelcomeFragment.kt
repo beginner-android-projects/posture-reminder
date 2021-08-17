@@ -1,7 +1,6 @@
 package com.puntogris.posture.ui.welcome
 
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.tabs.TabLayoutMediator
 import com.puntogris.posture.R
 import com.puntogris.posture.databinding.FragmentWelcomeBinding
 import com.puntogris.posture.ui.base.BaseFragment
@@ -15,7 +14,7 @@ class WelcomeFragment :BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_we
     }
 
     fun onStartButtonClicked(){
-        findNavController().navigate(R.id.action_welcomeFragment_to_newUserFragment)
+        findNavController().navigate(R.id.action_welcomeFragment_to_batteryOptimizationFragment)
     }
 
     override fun onDestroyView() {

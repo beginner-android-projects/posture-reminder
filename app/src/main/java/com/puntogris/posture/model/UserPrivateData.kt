@@ -1,17 +1,24 @@
 package com.puntogris.posture.model
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.Exclude
 import kotlinx.parcelize.Parcelize
 
+@Keep
 @Parcelize
 @Entity
 class UserPrivateData(
+
     @PrimaryKey(autoGenerate = false)
-    val userId: String,
+    @get:Exclude val roomId: Int =  1,
+
+    @ColumnInfo
+    val id: String,
 
     @ColumnInfo
     val name: String,

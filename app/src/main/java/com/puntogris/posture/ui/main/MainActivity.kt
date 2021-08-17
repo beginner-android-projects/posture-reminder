@@ -117,7 +117,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         arguments: Bundle?
     ) {
         if (destination.id == R.id.welcomeFragment ||
-            destination.id == R.id.newUserFragment ||
+            destination.id == R.id.synAccountFragment ||
             destination.id == R.id.batteryOptimizationFragment ||
             destination.id == R.id.loginFragment
         ) {

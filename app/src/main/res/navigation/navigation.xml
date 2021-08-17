@@ -11,7 +11,7 @@
         android:name="com.puntogris.posture.ui.account.AccountFragment"/>
     <dialog
         android:id="@+id/newReminderBottomSheet"
-        android:name="com.puntogris.posture.ui.new_reminder.NewReminderBottomSheet">
+        android:name="com.puntogris.posture.ui.reminders.new_edit.NewReminderBottomSheet">
         <argument
             android:name="reminder"
             app:argType="com.puntogris.posture.model.Reminder"
@@ -54,7 +54,7 @@
         android:name="com.puntogris.posture.ui.settings.SelectThemeDialog"/>
     <dialog
         android:id="@+id/manageRemindersBottomSheet"
-        android:name="com.puntogris.posture.ui.account.ManageRemindersBottomSheet" >
+        android:name="com.puntogris.posture.ui.reminders.manage.ManageRemindersBottomSheet" >
         <action
             android:id="@+id/action_manageRemindersBottomSheet_to_newReminderBottomSheet"
             app:destination="@id/newReminderBottomSheet" />
@@ -68,7 +68,7 @@
     </fragment>
     <dialog
         android:id="@+id/vibrationSelectorDialog"
-        android:name="com.puntogris.posture.ui.new_reminder.VibrationSelectorDialog" >
+        android:name="com.puntogris.posture.ui.reminders.new_edit.VibrationSelectorDialog" >
         <argument
             android:name="savedPosition"
             app:argType="integer"
@@ -76,7 +76,7 @@
     </dialog>
     <dialog
         android:id="@+id/soundSelectorDialog"
-        android:name="com.puntogris.posture.ui.new_reminder.SoundSelectorDialog">
+        android:name="com.puntogris.posture.ui.reminders.new_edit.SoundSelectorDialog">
         <argument
             android:name="savedSound"
             app:argType="string"

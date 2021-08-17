@@ -1,11 +1,11 @@
 package com.puntogris.posture.data.repo.main
 
-import com.google.firebase.auth.FirebaseAuth
+import com.puntogris.posture.data.remote.FirebaseDataSource
 import javax.inject.Inject
 
-class MainRepository @Inject constructor(): IMainRepository{
+class MainRepository @Inject constructor(
+    private val firebaseDataSource: FirebaseDataSource
+): IMainRepository{
 
-    private val auth = FirebaseAuth.getInstance()
-
-    override fun isUserLoggedIn() = auth.currentUser != null
+    override fun isUserLoggedIn() = firebaseDataSource.getCurrentUser() != null
 }

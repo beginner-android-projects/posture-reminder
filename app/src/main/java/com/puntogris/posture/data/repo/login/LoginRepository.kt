@@ -47,7 +47,7 @@ class LoginRepository @Inject constructor(
     private fun getUserPrivateDataFromFirebaseUser(user:FirebaseUser?): UserPrivateData{
         return UserPrivateData(
             name = user?.displayName.toString(),
-            userId = user?.uid.toString(),
+            id = user?.uid.toString(),
             email = user?.email.toString(),
             photoUrl = user?.photoUrl.toString()
         )

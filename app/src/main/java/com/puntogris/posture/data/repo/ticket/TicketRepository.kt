@@ -7,7 +7,9 @@ import com.puntogris.posture.data.local.UserDao
 import com.puntogris.posture.model.RepoResult
 import com.puntogris.posture.model.Ticket
 import com.puntogris.posture.utils.Constants.TICKET_COLLECTION_NAME
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -26,8 +28,8 @@ class TicketRepository @Inject constructor(): ITicketRepository {
         return sendTicketToFirestore(ticket)
     }
 
-    private suspend fun sendTicketToFirestore(ticket: Ticket): RepoResult{
-        return try {
+    private suspend fun sendTicketToFirestore(ticket: Ticket): RepoResult = withContext(Dispatchers.IO){
+        try {
             firestore.collection(TICKET_COLLECTION_NAME).add(ticket).await()
             RepoResult.Success
         }catch (e: Exception){ RepoResult.Failure }

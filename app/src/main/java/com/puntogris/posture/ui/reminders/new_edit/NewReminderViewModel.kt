@@ -1,4 +1,4 @@
-package com.puntogris.posture.ui.new_reminder
+package com.puntogris.posture.ui.reminders.new_edit
 
 import androidx.lifecycle.*
 import com.puntogris.posture.data.local.ReminderDao

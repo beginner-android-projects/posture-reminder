@@ -1,4 +1,4 @@
-package com.puntogris.posture.ui.new_reminder
+package com.puntogris.posture.ui.reminders.new_edit
 
 import android.text.InputType
 import androidx.fragment.app.setFragmentResultListener

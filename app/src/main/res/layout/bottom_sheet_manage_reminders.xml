@@ -6,7 +6,7 @@
     <data>
         <variable
             name="bottomSheet"
-            type="com.puntogris.posture.ui.account.ManageRemindersBottomSheet" />
+            type="com.puntogris.posture.ui.reminders.manage.ManageRemindersBottomSheet" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

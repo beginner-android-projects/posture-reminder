@@ -1,19 +1,14 @@
-package com.puntogris.posture.ui.account
+package com.puntogris.posture.ui.reminders.manage
 
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.puntogris.posture.R
 import com.puntogris.posture.databinding.BottomSheetManageRemindersBinding
 import com.puntogris.posture.model.Reminder
 import com.puntogris.posture.ui.base.BaseBottomSheetFragment
-import com.puntogris.posture.utils.createSnackBar
+import com.puntogris.posture.utils.showSnackBarInBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -23,7 +18,10 @@ class ManageRemindersBottomSheet: BaseBottomSheetFragment<BottomSheetManageRemin
 
     override fun initializeViews() {
         binding.bottomSheet = this
+        setupRecyclerViewAdapter()
+    }
 
+    private fun setupRecyclerViewAdapter(){
         ManageReminderAdapter(
             requireContext(),
             { onSelectReminder(it) },
@@ -45,7 +43,7 @@ class ManageRemindersBottomSheet: BaseBottomSheetFragment<BottomSheetManageRemin
         lifecycleScope.launch {
             viewModel.updateCurrentReminder(reminder.id)
             findNavController().navigateUp()
-            createSnackBar(getString(R.string.snack_configuration_updated))
+            showSnackBarInBottomSheet(R.string.snack_configuration_updated)
         }
     }
 
@@ -58,13 +56,13 @@ class ManageRemindersBottomSheet: BaseBottomSheetFragment<BottomSheetManageRemin
     private fun onDeleteReminder(reminder: Reminder){
         lifecycleScope.launch {
             viewModel.deleteReminder(reminder)
-            Snackbar.make(dialog?.window!!.decorView, getString(R.string.snack_delete_reminder_success), Snackbar.LENGTH_LONG)
-                .setAnchorView(binding.floatingActionButton)
-                .setAction(getString(R.string.action_undo)){
-                    lifecycleScope.launch {
-                        viewModel.insertReminder(reminder)
-                    }
-                }.show()
+            showSnackBarInBottomSheet(
+                message = R.string.snack_delete_reminder_success,
+                anchorView = binding.floatingActionButton){
+                lifecycleScope.launch {
+                    viewModel.insertReminder(reminder)
+                }
+            }
         }
     }
 

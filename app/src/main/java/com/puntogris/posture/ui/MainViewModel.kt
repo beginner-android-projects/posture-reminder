@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             reminder.value?.let {
                 alarm.startDailyAlarm(it)
-                reminderDao.updateReminderStatus(it.isActive)
+            //    reminderDao.updateReminderStatus(it.isActive)
             }
         }
     }
@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(
     fun cancelAlarms(){
         viewModelScope.launch {
             alarm.cancelAlarms()
-            reminderDao.updateReminderStatus(!reminder.value!!.isActive)
+          //  reminderDao.updateReminderStatus(!reminder.value!!.isActive)
         }
     }
 
@@ -43,11 +43,6 @@ class MainViewModel @Inject constructor(
         alarm.startDailyAlarm(reminder.value!!)
     }
 
-    fun enablePandaAnimation(){
-        viewModelScope.launch {
-         //   reminderDao.enablePandaAnimation()
-        }
-    }
 
     fun getLastTwoDaysHistory() = dayHistoryDao.getLastTwoEntries()
 

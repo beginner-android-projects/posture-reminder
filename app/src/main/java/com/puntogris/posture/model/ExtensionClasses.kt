@@ -23,3 +23,8 @@ sealed class LoginResult {
     class Success(val userPrivateData: UserPrivateData): LoginResult()
     class Error(val errorMsg: String?): LoginResult()
 }
+
+sealed class UserAccount{
+    object New: UserAccount()
+    object Registered: UserAccount()
+}

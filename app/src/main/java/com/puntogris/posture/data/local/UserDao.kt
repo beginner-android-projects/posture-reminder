@@ -14,18 +14,18 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(userPrivateData: UserPrivateData)
 
-    @Query("SELECT * FROM UserPrivateData WHERE userId = 1")
+    @Query("SELECT * FROM UserPrivateData WHERE roomId = 1")
     suspend fun getUser(): UserPrivateData
 
-    @Query("SELECT * FROM UserPrivateData WHERE userId = 1")
+    @Query("SELECT * FROM UserPrivateData WHERE roomId = 1")
     fun getUserLiveData(): LiveData<UserPrivateData>
 
-    @Query("SELECT * FROM UserPrivateData WHERE userId = 1")
+    @Query("SELECT * FROM UserPrivateData WHERE roomId = 1")
     fun getUserFlow(): Flow<UserPrivateData>
 
-    @Query("UPDATE UserPrivateData SET currentReminderId = :reminderId WHERE userId = 1")
-    suspend fun updateCurrentUserReminder(reminderId: Int)
+    @Query("UPDATE UserPrivateData SET currentReminderId = :reminderId WHERE roomId = 1")
+    suspend fun updateCurrentUserReminder(reminderId: String)
 
-    @Query("UPDATE UserPrivateData SET name = :name WHERE userId = 1")
+    @Query("UPDATE UserPrivateData SET name = :name WHERE roomId = 1")
     suspend fun updateUsername(name: String)
 }

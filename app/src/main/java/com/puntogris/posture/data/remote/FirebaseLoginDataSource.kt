@@ -1,6 +1,8 @@
 package com.puntogris.posture.data.remote
 
-class FirebaseLoginDataSource: FirebaseDataSource() {
+import javax.inject.Inject
+
+class FirebaseLoginDataSource @Inject constructor(): FirebaseDataSource() {
 
     fun logOutFromFirebase(){
         auth.signOut()

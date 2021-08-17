@@ -4,7 +4,7 @@ import javax.inject.Inject
 
 class FirebaseSyncDataSource @Inject constructor(): FirebaseDataSource() {
 
-    fun getBatch() = firestore.batch()
+    fun runBatch() = firestore.batch()
 
     fun getUserPrivateDataRef() =
         firestore

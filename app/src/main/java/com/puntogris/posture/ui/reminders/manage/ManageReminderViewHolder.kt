@@ -1,4 +1,4 @@
-package com.puntogris.posture.ui.account
+package com.puntogris.posture.ui.reminders.manage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

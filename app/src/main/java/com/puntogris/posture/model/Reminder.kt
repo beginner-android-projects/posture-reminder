@@ -2,17 +2,19 @@ package com.puntogris.posture.model
 
 import android.os.Parcelable
 import androidx.annotation.ColorRes
+import androidx.annotation.Keep
 import androidx.room.*
 import org.jetbrains.annotations.NotNull
 import com.puntogris.posture.R
 import kotlinx.parcelize.Parcelize
 
+@Keep
 @Parcelize
 @Entity
 data class Reminder(
 
     @PrimaryKey(autoGenerate = false)
-    val reminderId: String = "",
+    val id: String = "",
 
     @ColumnInfo
     var name: String = "",

@@ -1,13 +1,11 @@
-package com.puntogris.posture.ui.account
+package com.puntogris.posture.ui.reminders.manage
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.puntogris.posture.model.Reminder
-import com.puntogris.posture.ui.ReminderDiffCallBack
 import com.puntogris.posture.utils.SwipeToDeleteCallback
 
 class ManageReminderAdapter(
